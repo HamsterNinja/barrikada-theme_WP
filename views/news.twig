@@ -1,0 +1,32 @@
+{% include "partials/header.twig" %}
+<main class='main-content' id="app">
+<div class="product-page-content">
+	<div class="container">
+		<div class="catalog-header">
+			<nav class="woocommerce-breadcrumb"><a href="">Главная</a>&nbsp;/&nbsp;Каталог</nav>
+			<div class="catalog-title">
+				<h1>Новости</h1>
+				<hr class="catalog-title-decore">
+			</div>
+		</div>
+		<div class="actions-banner_block">
+			<img src="./assets/images/action.jpg" alt="">
+		</div>
+		<div class="actions-content">
+			{% for item in 0..8 %}
+			<a href="" class="news-item">
+				<div class="actions-item-img">
+					<img src="./assets/images/news.jpg" alt="">
+				</div>
+				<div class="actions-item-date">04.02.2020</div>
+				<div class="actions-item-info">
+					<div class="actions-item-name">Преимущества садовой мебели для вашего сада.</div>
+					<div class="actions-item-text">В период с c 21 по 25 ноября 2016 в ЦВК «Экспоцентр» на Красной Пресне в столице пройдет очередная, 28-я по счету Международная выставка «Мебель</div>
+				</div>
+			</a>
+			{% endfor %}
+		</div>
+	</div>
+
+</main>
+{% include "partials/footer.twig" %}

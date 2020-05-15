@@ -1,0 +1,108 @@
+{% include "partials/header.twig" %}
+<main class='main-content' id="app">
+<div class="catalog-content">
+	<div class="container">
+		<div class="catalog-header">
+			<nav class="woocommerce-breadcrumb"><a href="">Главная</a>&nbsp;/&nbsp;Каталог</nav>
+			<div class="catalog-title">
+				<h1>МЕБЕЛЬ ДЛЯ СПАЛЬНИ</h1>
+				<hr class="catalog-title-decore">
+			</div>
+		</div>
+		<div class="catalog-content-left">
+			<div class="catalog-sort">
+				<div class="catalog-sort-text">Сортировать по:</div>
+				<select name="" id="">
+					<option value="">Популярсности</option>
+					<option value="">От дешевых к дорогим</option>
+					<option value="">От дорогих к дешевым</option>
+				</select>
+			</div>
+			<div class="actions-banner_block">
+				<img src="./assets/images/action.jpg" alt="">
+			</div>
+			<div class="catalog-content-inner">
+			{% for item in 0..11 %}
+			    <a class="product-card" href="">
+					<div class="card-image"><img src="./assets/images/product-m.jpg" alt=""></div>
+					<div class="card-cat"><h3>Мебель для кухни</h3></div>
+					<div class="card-name"><h4>СТУЛ AV-20ST название возможно в две строки</h4></div>
+					<div class="card-bottom">
+						<div class="card-prices">
+							<p>Цена: <span>10 000 ₽</span></p>
+							<div class="current-price">10 000 ₽</div>
+						</div>
+									
+						<button class="button product-variations-title__favorite add_favorite" tabindex="0">
+							<svg width="32" height="30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.595 4.901l.405.56.405-.56a9.79 9.79 0 011.934-2.02c1.403-1.085 2.988-1.631 4.722-1.631 2.333 0 4.472.932 6.033 2.625C30.638 5.55 31.5 7.851 31.5 10.367c0 2.563-.948 4.93-3.059 7.477h0c-1.903 2.297-4.648 4.639-7.883 7.395h0l-.028.023c-1.094.933-2.335 1.991-3.623 3.117h0a1.377 1.377 0 01-1.815 0h0c-1.297-1.135-2.546-2.199-3.646-3.136l-.003-.003h0c-3.235-2.757-5.98-5.1-7.884-7.396C1.449 15.298.5 12.93.5 10.367c0-2.516.862-4.817 2.406-6.492 1.56-1.693 3.7-2.625 6.033-2.625 1.734 0 3.319.546 4.722 1.631h0a9.781 9.781 0 011.934 2.02z" stroke="#D1D1D1"/></svg>
+						</button>
+						<button class="button button--products-add card-cart">
+							<svg width="29" height="27" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.009 23.66a2.408 2.408 0 11-4.817 0 2.408 2.408 0 014.817 0zm7.343-2.409a2.408 2.408 0 100 4.817 2.408 2.408 0 000-4.817zm7.476-11.306l-2.964 8.808s-.245 1.308-1.495 1.308H9.405c-1.492 0-1.554-1.639-1.554-1.639S6.26 6.626 6.18 5.913c-.078-.713-.99-1.24-.99-1.24L1.272 2.84C-.878 1.718.098-.419 1.27.072c4.972 2.346 7.282 3.5 7.43 4.425.15.925.412 3.155.412 3.155v.014l.052-.014h18.329c2.213 0 1.334 2.297 1.334 2.293zM24.54 14.85l-.03.002H10.003l.299 2.37h13.534l.705-2.372zm1.413-4.781H9.404l.318 2.534h15.483l.749-2.534z" fill="#A90E2D"/></svg>
+						</button>
+					</div>
+					<div class="card-info">
+						<div class="card-info-row">
+							<div class="card-info-name">Материалы:</div>
+							<div class="card-info-value">Дерево, пластик</div>
+						</div>
+						<div class="card-info-row">
+							<div class="card-info-name">Размер:</div>
+							<div class="card-info-value">40х30х80</div>
+						</div>
+					</div>
+				</a>
+			{% endfor %}
+			</div>
+			<a href="" class="view-all">Показать ещё</a>
+		</div>
+		<div class="catalog-content-right">
+			<div class="catalog-filter-title">
+			<span>Фильтр</span>
+			<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 160 160" class="plus">
+				<path d="M70 0h20v160H70z" class="vertical-line"></path>
+				<path d="M0 70h160v20H0z" class="horizontal-line"></path>
+			</svg>
+			</div>
+			<div class="catalog-filter-content">
+				<div class="filter-prices">
+					<div class="filter-prices-name">Цена</div>
+					<div class="filter-prices-value">
+                        <div class="range-multiple_input">
+                            <span>от </span>
+                            <input type="number" name="price_min" class="input-default" value="0" placeholder="0" data-range-start="0" data-default-value="0">
+                        </div>
+                        <div class="range-multiple_input field--filled">
+                            <span>до </span>
+                            <input type="number" name="price_max" class="input-default" value="1000000" placeholder="1000000" data-range-end="1000000" data-default-value="1000000">
+                        </div>
+					</div>
+				</div>
+				<div class="filter-categories">
+					<div class="filter-categories-name">Категории</div>
+					<div class="control-group">
+						{% for item in 0..3 %}
+						    <label class="control control-checkbox">
+					        Модульные
+					            <input type="checkbox" checked="checked" />
+					        <div class="control_indicator"></div>
+					    </label>
+						{% endfor %}
+					</div>
+				</div>
+				<div class="filter-row">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="seo_block">
+	<div class="container">
+		<div class="seo-title"><h1>Больше, чем интернет-магазин мебели</h1></div>
+		<div class="seo-text">
+			<p>Высокий уровень вовлечения представителей целевой аудитории является четким доказательством простого факта: новая модель организационной деятельности требует анализа как самодостаточных, так и внешне зависимых концептуальных решений. Сложно сказать, почему элементы политического процесса могут быть указаны как претенденты на роль ключевых факторов. Сделанные на базе интернет-аналитики выводы объявлены нарушающими общечеловеческие нормы этики и морали. Имеется спорная точка зрения, гласящая примерно следующее: независимые государства, превозмогая сложившуюся непростую экономическую ситуацию, указаны как претенденты на роль ключевых факторов. Постоянное информационно-пропагандистское обеспечение нашей деятельности предоставляет широкие возможности для существующих финансовых и административных условий. Предварительные выводы неутешительны: экономическая повестка сегодняшнего дня влечет за собой процесс внедрения и модернизации анализа существующих паттернов поведения. Таким образом, постоянный количественный рост и сфера нашей активности позволяет оценить значение кластеризации усилий. Повседневная практика показывает, что новая модель организационной деятельности предопределяет высокую востребованность форм воздействия. Принимая во внимание показатели успешности, современная методология разработки обеспечивает актуальность приоритизации разума над эмоциями. Принимая во внимание показатели успешности, начало повседневной работы по формированию позиции не оставляет шанса для экспериментов, поражающих по своей масштабности и грандиозности. В частности, высококачественный прототип будущего проекта предопределяет высокую востребованность поэтапного и последовательного развития общества. В целом, конечно, экономическая повестка сегодняшнего дня влечет за собой процесс внедрения и модернизации существующих финансовых и административных условий. Повседневная практика показывает, что существующая теория представляет собой интересный эксперимент проверки глубокомысленных рассуждений.</p>
+		</div>
+	</div>
+</div>
+</main>
+{% include "partials/footer.twig" %}

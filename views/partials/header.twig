@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="{{ site.charset }}" />
+    <title>
+        {% if wp_title %}
+        {{ wp_title }} - {{ site.name }}
+        {% else %}
+        {{ site.name }}
+        {% endif %}
+    </title>
+
+    <!-- favicon start -->
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ site.theme.link }}/assets/images/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ site.theme.link }}/assets/images/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ site.theme.link }}/assets/images/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ site.theme.link }}/assets/images/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ site.theme.link }}/assets/images/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ site.theme.link }}/assets/images/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ site.theme.link }}/assets/images/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ site.theme.link }}/assets/images/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ site.theme.link }}/assets/images/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ site.theme.link }}/assets/images/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ site.theme.link }}/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ site.theme.link }}/assets/images/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ site.theme.link }}/assets/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="{{ site.theme.link }}/assets/images/favicon/manifest.json">
+    <link rel="shortcut icon" href="{{ site.theme.link }}/assets/images/favicon/favicon.ico">
+    <!-- favicon end -->
+
+    <meta name="description" content="{{ site.description }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <link rel="author" href="{{ site.theme.link }}/humans.txt" />
+    <link rel="pingback" href="{{ site.pingback_url }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    {{function('wp_head')}}
+</head>
+
+<body class="{{body_class}}">
+<body>
+	<aside class="sidebar">
+		<div class="sidebar-inner">
+		<div class="sidebar-logo">
+			<a href=""><h2>Мебель в Орехово-Зуево</h2></a>
+			<div class="sidebar-description"><h2>Мебель в Орехово-Зуево</h2></div>
+		</div>
+		<div class="sidebar-search">
+			<form role="search" method="get" action="" class="searchform group">
+				<input type="submit" value="" class="search-button">
+				<input required="required" type="text" name="s" id="s" placeholder="Найти мебель" class="search-text">
+			</form>
+		</div>
+		<div class="sidebar-menu">
+			<ul>
+				{% for item in 0..19 %}
+				<li>
+					<a href=""><img src="./assets/images/cat-1.png" alt=""><span>Кухонные гарнитуры</span></a>
+					<ul class="sub-menu">
+						{% for item in 0..6 %}    
+						<li>
+							<a href="">Кухонные комплектующие</a>
+							<ul class="sub-menu">
+								{% for item in 0..3 %}    
+								<li>
+									<a href="">Мойки</a>
+									<ul class="sub-menu">
+										{% for item in 0..1 %}    
+										<li>
+											<a href="">Нержавейка</a>
+										</li>
+										{% endfor %}
+									</ul>
+								</li>
+								{% endfor %}
+							</ul>
+						</li>
+						{% endfor %}
+					</ul>
+				</li>
+				{% endfor %}
+				<li>
+					<a href=""><img src="./assets/images/cat-7.png" alt=""><span>Супер предложения</span></a>
+					<ul class="sub-menu">
+						{% for item in 0..6 %}    
+						<li><a href="">Кухни из плёнки</a></li>
+						{% endfor %}
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="sidebar-bottom">
+			<a href="tel:+7 000 000 00 00" class="sidebar-phone">+7 000 000 00 00</a>
+			<a href="" class="sidebar-callback">Обратный звонок</a>
+		</div>
+		</div>
+	</aside>
+	<div class="content">
+    <header class="main-header">
+    	<div class="container">
+    		<div class="main-header-logo">
+    			<a href=""><h2>Мебель в Орехово-Зуево</h2></a>
+    		</div>
+     		<div class="main-header-menu">
+     			<ul>
+     				<li><a href="">О нас</a></li>
+     				<li><a href="">Новости</a></li>
+     				<li><a href="">Акции</a></li>
+     				<li><a href="">Каталог</a></li>
+     				<li><a href="">Контакты</a></li>
+     			</ul>
+     		</div>
+     		<div class="main-header-callback">
+     			<a class="main-header-phone" href="tel:+7 000 000 00 00">+7 000 000 00 00</a>
+     			<a class="main-header-callback-link" href="">Перезвоните мне</a>
+     		</div>
+			<div id="sb-search" class="sb-search">
+				<form role="search" method="get" id="searchform" action="">
+					<input class="sb-search-input" placeholder="Поиск" type="text" value="" name="search" id="search">
+					<input class="sb-search-submit" type="submit" value="">
+					<span class="sb-icon-search"></span>
+				</form>
+			</div>
+     		<a href="" class="favorite-link">Избранное</a>
+			<a class="cart-link" href="">Корзина</a>
+ 		</div>
+    </header>
