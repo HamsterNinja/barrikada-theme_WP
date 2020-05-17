@@ -100,10 +100,11 @@ function time_enqueuer($my_handle, $relpath, $type='script', $async='false', $me
 add_action('wp_footer', 'add_scripts');
 function add_scripts() {
     time_enqueuer('jquerylatest', '/assets/js/vendors/jquery-3.2.0.min.js', 'script', true);
-    time_enqueuer('swiperjs', 'https://unpkg.com/swiper/js/swiper.min.js', 'script', true);
-    time_enqueuer('masonry', '/assets/js/vendors/masonry.pkgd.min.js', 'script', true);
+   
+    time_enqueuer('masonryjs', '/assets/js/vendors/masonry.pkgd.min.js', 'script', true);
     time_enqueuer('classie', '/assets/js/vendors/classie.js', 'script', true);
     time_enqueuer('uisearch', '/assets/js/vendors/uisearch.js', 'script', true);
+    wp_enqueue_script('swiperjs','https://unpkg.com/swiper/js/swiper.min.js','','',true);
     time_enqueuer('app-main', '/assets/js/main.bundle.js', 'script', true);
     
     $queried_object = get_queried_object();
@@ -172,8 +173,8 @@ add_action( 'wp_default_scripts', 'dequeue_jquery_migrate' );
 
 function add_styles() {
         if(is_admin()) return false;  
-        time_enqueuer('main', '/assets/css/main.css', 'style', false, 'all');    
-        time_enqueuer('swiper', 'https://unpkg.com/swiper/css/swiper.min.css', 'style', false, 'all');     
+        wp_enqueue_style('swipercss','https://unpkg.com/swiper/css/swiper.min.css');
+        time_enqueuer('main', '/assets/css/main.css', 'style', false, 'all');     
 }
 add_action('wp_print_styles', 'add_styles');
 
@@ -215,6 +216,22 @@ class StarterSite extends TimberSite {
 
         global $product; //Если не объявлен ранее. Не уверен в необходимости.
         $categories = get_the_terms( $post->ID, 'product_cat' );
+        $args = array(
+            'post_type' => 'product',
+            'posts_per_page' => 10,
+            'post_parent' => 0,
+            'orderby' => 'rand',
+            'tax_query' => array(
+                'relation' => 'AND',
+                array(
+                    'taxonomy' => 'product_cat',
+                    'field' => 'term_id',
+                    'terms' => $categories[0]->term_id,
+                )
+            )   
+        );  
+      $context['other_prod'] = Timber::get_posts($args);
+        $categories = get_the_terms( $post->ID, 'product_cat' );
         
         $product_brands = get_terms( array(
             'taxonomy' => 'brand_product',
@@ -244,92 +261,36 @@ function timber_set_product( $post ) {
 }
 
 function woocommerce_script_cleaner() {
-	// Remove the generator tag
-	remove_action( 'wp_head', array( $GLOBALS['woocommerce'], 'generator' ) );
-	wp_dequeue_style( 'woocommerce_fancybox_styles' );
-	wp_dequeue_style( 'woocommerce_chosen_styles' );
-	wp_dequeue_style( 'woocommerce_prettyPhoto_css' );
-	wp_dequeue_script( 'selectWoo' );
-	wp_deregister_script( 'selectWoo' );
-	wp_dequeue_script( 'wc-add-payment-method' );
-	wp_dequeue_script( 'wc-lost-password' );
-	wp_dequeue_script( 'wc_price_slider' );
-	wp_dequeue_script( 'wc-single-product' );
-	// wp_dequeue_script( 'wc-cart-fragments' );
-	wp_dequeue_script( 'wc-credit-card-form' );
-	wp_dequeue_script( 'wc-checkout' );
-	wp_dequeue_script( 'wc-add-to-cart-variation' );
-	wp_dequeue_script( 'wc-single-product' );
-	wp_dequeue_script( 'wc-cart' );
-	wp_dequeue_script( 'wc-chosen' );
-	wp_dequeue_script( 'woocommerce' );
-	wp_dequeue_script( 'prettyPhoto' );
-	wp_dequeue_script( 'prettyPhoto-init' );
-	wp_dequeue_script( 'jquery-blockui' );
-	wp_dequeue_script( 'jquery-placeholder' );
-	wp_dequeue_script( 'jquery-payment' );
-	wp_dequeue_script( 'fancybox' );
-	wp_dequeue_script( 'jqueryui' );
-	if ( !is_checkout() && !is_account_page() ) {
+    // Remove the generator tag
+    remove_action( 'wp_head', array( $GLOBALS['woocommerce'], 'generator' ) );
+
+
+    wp_dequeue_script( 'selectWoo' );
+    wp_deregister_script( 'selectWoo' );
+    wp_dequeue_script( 'wc-add-payment-method' );
+    wp_dequeue_script( 'wc-lost-password' );
+    wp_dequeue_script( 'wc_price_slider' );
+    wp_dequeue_script( 'wc-single-product' );
+    // wp_dequeue_script( 'wc-cart-fragments' );
+    wp_dequeue_script( 'wc-credit-card-form' );
+    wp_dequeue_script( 'wc-checkout' );
+    wp_dequeue_script( 'wc-add-to-cart-variation' );
+    wp_dequeue_script( 'wc-single-product' );
+    wp_dequeue_script( 'wc-cart' );
+    wp_dequeue_script( 'wc-chosen' );
+    wp_dequeue_script( 'woocommerce' );
+    wp_dequeue_script( 'prettyPhoto' );
+    wp_dequeue_script( 'prettyPhoto-init' );
+    wp_dequeue_script( 'jquery-blockui' );
+    wp_dequeue_script( 'jquery-placeholder' );
+    wp_dequeue_script( 'jquery-payment' );
+    wp_dequeue_script( 'fancybox' );
+    wp_dequeue_script( 'jqueryui' );
+    if ( ! is_woocommerce() && ! is_cart() && ! is_checkout() ) {
         // wp_dequeue_script( 'wc-add-to-cart' );
-        wp_dequeue_style( 'woocommerce_frontend_styles' );
-        wp_dequeue_style( 'woocommerce-general');
-        wp_dequeue_style( 'woocommerce-layout' );
-        wp_dequeue_style( 'woocommerce-smallscreen' );
     }
 }
 
-
-function wooc_extra_register_fields() {?>      
-       <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-          <label for="reg_first_name"><?php _e( 'First name', 'woocommerce' ); ?><span class="required">*</span></label>
-          <input type="text" class="input-text" name="first_name" id="reg_first_name" value="<?php if ( ! empty( $_POST['first_name'] ) ) esc_attr_e( $_POST['first_name'] ); ?>" />
-       </p>
-       <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-          <label for="reg_last_name"><?php _e( 'Last name', 'woocommerce' ); ?><span class="required">*</span></label>
-          <input type="text" class="input-text" name="last_name" id="reg_last_name" value="<?php if ( ! empty( $_POST['last_name'] ) ) esc_attr_e( $_POST['last_name'] ); ?>" />
-       </p>
-       <div class="clear"></div>
-
-
-       <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-          <label for="reg_billing_phone"><?php _e( 'Phone', 'woocommerce' ); ?></label>
-          <input type="text" class="input-text" name="billing_phone" id="reg_billing_phone" value="<?php esc_attr_e( $_POST['billing_phone'] ); ?>" />
-       </p>
-       <?php
- }
- add_action( 'woocommerce_register_form_start', 'wooc_extra_register_fields' );
-
- function wooc_validate_extra_register_fields( $username, $email, $validation_errors ) {
-      if ( isset( $_POST['first_name'] ) && empty( $_POST['first_name'] ) ) {
-             $validation_errors->add( 'first_name_error', __( '<strong>Error</strong>: First name is required!', 'woocommerce' ) );
-      }
-      if ( isset( $_POST['last_name'] ) && empty( $_POST['last_name'] ) ) {
-             $validation_errors->add( 'last_name_error', __( '<strong>Error</strong>: Last name is required!.', 'woocommerce' ) );
-      }
-         return $validation_errors;
-}
-
-function wooc_save_extra_register_fields( $customer_id ) {
-    if ( isset( $_POST['billing_phone'] ) ) {
-                 // billing_phone input filed which is used in WooCommerce
-                 update_user_meta( $customer_id, 'billing_phone', sanitize_text_field( $_POST['billing_phone'] ) );
-          }
-      if ( isset( $_POST['first_name'] ) ) {
-             //First name field which is by default
-             update_user_meta( $customer_id, 'first_name', sanitize_text_field( $_POST['first_name'] ) );
-             // First name field which is used in WooCommerce
-             update_user_meta( $customer_id, 'first_name', sanitize_text_field( $_POST['first_name'] ) );
-      }
-      if ( isset( $_POST['last_name'] ) ) {
-             // Last name field which is by default
-             update_user_meta( $customer_id, 'last_name', sanitize_text_field( $_POST['last_name'] ) );
-             // Last name field which is used in WooCommerce
-             update_user_meta( $customer_id, 'last_name', sanitize_text_field( $_POST['last_name'] ) );
-      }
-
-}
-add_action( 'woocommerce_created_customer', 'wooc_save_extra_register_fields' );
 
 add_action( 'wp_enqueue_scripts', 'woocommerce_script_cleaner', 99 );
 

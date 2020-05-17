@@ -1,16 +1,19 @@
 <template>
   <div class="product-quantity">
-    <button class="count-product__decrement" v-on:click="decrementProduct">
-      <svg width="5" height="24" viewBox="0 0 8 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 1H8" fill="#fff" stroke="#fff"></path>
-      </svg>
-    </button>
-    <span class="inputNumber">{{ productCountComponent }}</span>
-    <button class="count-product__increment" v-on:click="incrementProduct">
-      <svg width="9" height="24" viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 4H4.25M8.5 4H4.25M4.25 4V0V8" stroke="#fff"></path>
-      </svg>
-    </button>
+    <div class="product-quantity-name">Количество:</div>
+    <div class="product-quantity-value">
+      <button class="count-product__decrement" v-on:click="decrementProduct">
+        <svg width="5" height="24" viewBox="0 0 8 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 1H8" fill="#000" stroke="#000"></path>
+        </svg>
+      </button>
+      <span class="inputNumber">{{ productCountComponent }}</span>
+      <button class="count-product__increment" v-on:click="incrementProduct">
+        <svg width="9" height="24" viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 4H4.25M8.5 4H4.25M4.25 4V0V8" stroke="#333"></path>
+        </svg>
+      </button>
+    </div>
   </div>
 </template>
 

@@ -1,0 +1,18 @@
+{% include "partials/header.twig" %}
+<main class="main-content" id="app">
+    <div class="contacts-content">
+        <div class="container">
+            {{ function('woocommerce_breadcrumb') }}
+            <div class="all-page-title">
+                <h1>{{ post.title }}</h1>
+            </div>
+            <div class="favorites-control">
+                <button class="button button--favorites-clear" v-on:click="clearFavorites">Очистить закладки</button>
+            </div>
+            
+                <product-favorite></product-favorite>    
+            
+        </div>
+    </div>
+</main>
+{% include "partials/footer.twig" %}

@@ -1,3 +1,24 @@
+new UISearch( document.getElementById( 'sb-search' ) );
+
+$(document).ready(function (){
+$('.btn-hamburger').click(function() {    
+  $('.sidebar').toggleClass('active');
+  $('.main-header-menu').removeClass('active');
+});
+$('.btn-hamburger-2').click(function() {    
+  $('.main-header-menu').toggleClass('active');
+  $('.sidebar').removeClass('active');
+});
+$('.catalog-filter-title').click(function() {    
+    $('.catalog-filter-content').slideToggle();
+});
+$('.product-description-content').masonry({
+  // options
+  itemSelector: '.description-item',
+  percentPosition: true,
+  columnWidth: '.description-item',
+  gutter: 130
+});
 var swiper = new Swiper('.swiper-container.main-swiper', {
       slidesPerView: 1,
       loop: true,
@@ -24,7 +45,7 @@ return number;
     }
     });
 
-new UISearch( document.getElementById( 'sb-search' ) );
+
 
 var swiper = new Swiper('.swiper-container.new-products-swiper', {
       slidesPerView: 1,
@@ -78,28 +99,6 @@ var galleryThumbs = new Swiper('.gallery-thumbs', {
       }
     });
 
-
-$(document).ready(function (){
-$('.btn-hamburger').click(function() {    
-  $('.sidebar').toggleClass('active');
-  $('.main-header-menu').removeClass('active');
-});
-$('.btn-hamburger-2').click(function() {    
-  $('.main-header-menu').toggleClass('active');
-  $('.sidebar').removeClass('active');
-});
-$('.catalog-filter-title').click(function() {    
-    $('.catalog-filter-content').slideToggle();
-});
-$('.product-description-content').masonry({
-  // options
-  itemSelector: '.description-item',
-  percentPosition: true,
-  columnWidth: '.description-item',
-  gutter: 130
-});
-
-
 });
 
 import ProductList from './components/ProductList.vue';
@@ -112,61 +111,9 @@ import countProduct from './components/countProduct.vue'
 Vue.component('count-product', countProduct);
 
 document.addEventListener('DOMContentLoaded', () => {
-    switchNavElements.init();
-    viewedProducts.init();
-    headerMenu.init();
     modalViews.init();
     formSubmitListeners.init();
 });
-
-const headerMenu = {
-    init: () => {
-        let hamburger = document.querySelector(".main-header-menu-container ul li:first-child");
-        let hiddenMenu = document.querySelector('.main-header-hidden-menu');   
-        let hiddenInnerMenuItems = document.querySelectorAll('.main-header-hidden-menu-right-inner');
-        hamburger.addEventListener("mouseover", function( event ) {
-            hiddenInnerMenuItems.forEach(hiddenInnerMenuItem => {
-                hiddenInnerMenuItem.classList.remove('active')
-            });
-            hiddenMenu.classList.add('active');
-        }, false);
-
-        hiddenMenu.addEventListener("mouseover", function( event ) {
-            hiddenMenu.classList.add('active');
-        }, false);
-        
-        let header = document.querySelector('.main-header-menu-container');
-        let otherElements = document.querySelectorAll(".main-header-menu-container ul li:not(:first-child)");
-
-        header.addEventListener("mouseleave", function( event ) {   
-            hiddenMenu.classList.remove('active');
-        }, false);
-
-        let mainContent = document.querySelector('.main-content');
-        mainContent.addEventListener("mouseover", function( event ) {
-            hiddenMenu.classList.remove('active');
-        }, false);
-        
-        otherElements.forEach(otherElement => {
-            otherElement.addEventListener("mouseleave", function( event ) {   
-                hiddenMenu.classList.remove('active');
-            }, false);
-        });
-
-        let hiddenMenuItems = document.querySelectorAll('.main-header-hidden-menu-left-container ul li');
-        
-        hiddenMenuItems.forEach((hiddenMenuItem, index) => {
-            hiddenMenuItem.addEventListener("mouseover", openHiddenInnerMenuItems.bind( null, index), false);;
-        });
-
-        function openHiddenInnerMenuItems(index) {
-            hiddenInnerMenuItems.forEach(hiddenInnerMenuItem => {
-                hiddenInnerMenuItem.classList.remove('active')
-            });
-            hiddenInnerMenuItems[index].classList.add('active');
-        }
-    }
-}
 
   
 import 'babel-polyfill';

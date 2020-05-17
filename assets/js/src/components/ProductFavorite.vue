@@ -1,5 +1,5 @@
 <template>
-    <div class="products-items products-items--favorites">
+    <div class="catalog-content-inner products-items--favorites">
     <template v-for="product in favorite_products">
         <product-item :product="product" class="products-item--viewed"></product-item>
     </template>

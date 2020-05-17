@@ -1,0 +1,15 @@
+{% include "partials/header.twig" %}
+<main class="main-content">
+    <div class="default-content">
+        <div class="container">
+            {{ function('woocommerce_breadcrumb') }}
+            <div class="all-page-title">
+                <h1>{{ post.title }}</h1>
+            </div>
+            <div class="container">
+                {{ post.get_content|shortcodes }} 
+            </div>
+        </div>
+    </div>
+</main>
+{% include "partials/footer.twig" %}

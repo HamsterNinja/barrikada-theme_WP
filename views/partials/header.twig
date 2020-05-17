@@ -43,7 +43,7 @@
 	<aside class="sidebar">
 		<div class="sidebar-inner">
 		<div class="sidebar-logo">
-			<a href=""><h2>Мебель в Орехово-Зуево</h2></a>
+			<a href="{{ site.link }}"><h2>Мебель в Орехово-Зуево</h2></a>
 			<div class="sidebar-description"><h2>Мебель в Орехово-Зуево</h2></div>
 		</div>
 		<div class="sidebar-search">
@@ -56,7 +56,7 @@
 			<ul>
 				{% for item in 0..19 %}
 				<li>
-					<a href=""><img src="./assets/images/cat-1.png" alt=""><span>Кухонные гарнитуры</span></a>
+					<a href="{{ site.link }}/product-category/katalog/"><img src="{{ site.theme.link }}/assets/images/cat-1.png" alt=""><span>Кухонные гарнитуры</span></a>
 					<ul class="sub-menu">
 						{% for item in 0..6 %}    
 						<li>
@@ -64,11 +64,11 @@
 							<ul class="sub-menu">
 								{% for item in 0..3 %}    
 								<li>
-									<a href="">Мойки</a>
+									<a href="{{ site.link }}/product-category/katalog/">Мойки</a>
 									<ul class="sub-menu">
 										{% for item in 0..1 %}    
 										<li>
-											<a href="">Нержавейка</a>
+											<a href="{{ site.link }}/product-category/katalog/">Нержавейка</a>
 										</li>
 										{% endfor %}
 									</ul>
@@ -81,12 +81,7 @@
 				</li>
 				{% endfor %}
 				<li>
-					<a href=""><img src="./assets/images/cat-7.png" alt=""><span>Супер предложения</span></a>
-					<ul class="sub-menu">
-						{% for item in 0..6 %}    
-						<li><a href="">Кухни из плёнки</a></li>
-						{% endfor %}
-					</ul>
+					<a href="{{ site.link }}/product-category/katalog/"><img src="{{ site.theme.link }}/assets/images/cat-7.png" alt=""><span>Супер предложения</span></a>
 				</li>
 			</ul>
 		</div>
@@ -100,15 +95,15 @@
     <header class="main-header">
     	<div class="container">
     		<div class="main-header-logo">
-    			<a href=""><h2>Мебель в Орехово-Зуево</h2></a>
+    			<a href="{{ site.link }}"><h2>Мебель в Орехово-Зуево</h2></a>
     		</div>
      		<div class="main-header-menu">
      			<ul>
-     				<li><a href="">О нас</a></li>
-     				<li><a href="">Новости</a></li>
-     				<li><a href="">Акции</a></li>
-     				<li><a href="">Каталог</a></li>
-     				<li><a href="">Контакты</a></li>
+     			{% for item in menu_header.get_items %}
+                	<li itemprop="name" class="{{item.class}}">
+                    	<a itemprop="url" href="{{ item.link }}">{{ item.title }}</a>
+                	</li>
+                {% endfor %}
      			</ul>
      		</div>
      		<div class="main-header-callback">
@@ -122,7 +117,7 @@
 					<span class="sb-icon-search"></span>
 				</form>
 			</div>
-     		<a href="" class="favorite-link">Избранное</a>
-			<a class="cart-link" href="">Корзина</a>
+     		<a href="{{ site.link }}/favorite" class="favorite-link">Избранное</a>
+			<a class="cart-link" href="{{ site.link }}/cart">Корзина</a>
  		</div>
     </header>

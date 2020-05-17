@@ -56,7 +56,7 @@ module.exports = {
         loader: 'babel-loader',
         query: {
           presets: [
-            ['latest', {
+            ['@babel/preset-env', {
               modules: false
             }],
           ],
