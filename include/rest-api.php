@@ -210,3 +210,82 @@ function set_item_from_cart_by_cart_id() {
 }
 add_action('wp_ajax_set_item_from_cart_by_cart_id', 'set_item_from_cart_by_cart_id');
 add_action('wp_ajax_nopriv_set_item_from_cart_by_cart_id', 'set_item_from_cart_by_cart_id');
+
+
+function my_array_unique($array, $keep_key_assoc = false){
+    $duplicate_keys = array();
+    $tmp = array();       
+
+    foreach ($array as $key => $val){
+        // convert objects to arrays, in_array() does not support objects
+        if (is_object($val))
+            $val = (array)$val;
+
+        if (!in_array($val, $tmp))
+            $tmp[] = $val;
+        else
+            $duplicate_keys[] = $key;
+    }
+
+    foreach ($duplicate_keys as $key)
+        unset($array[$key]);
+
+    return $keep_key_assoc ? $array : array_values($array);
+}
+//Получение атрибутов
+function getTermByCategory(WP_REST_Request $request) {
+    if(isset ($_GET)){
+        $taxonomyID = $request['taxonomy_id'];
+        $attrName = $request['attr_name'];
+
+        if($taxonomyID !== 'null'){
+            $args = array(
+                'category' => array( $taxonomyID ),
+                'numberposts' => -1,
+                'post_status' => 'published',
+                'post_type' => 'product',
+            );
+        }
+        else{
+            $args = ['post_status' => 'published','post_type' => 'product','numberposts' => -1]; 
+        }
+
+        $term_objects = [];
+        $products = new WP_Query($args);
+        while( $products->have_posts() ){
+            $products->the_post();
+            $post_id = get_the_ID();
+            $product = wc_get_product($post_id);
+            foreach( $product->get_attributes() as $attr_name => $attr ){
+                if ($attrName == $attr_name) {
+                    foreach( $attr->get_terms() as $term ){
+                        $term_object = (object)[];
+                        $term_object->id = $term->term_id;
+                        $term_object->slug = $term->slug;
+                        $term_object->name = $term->name;
+
+                        // $image = get_field('color', 'pa_cvet_'.$term->term_id);
+                        // $hex = get_field('hex', 'pa_cvet_'.$term->term_id);
+                        // $term_object->image = $image;
+                        // $term_object->hex = $hex;
+  
+    
+                        $term_object->attr_name = $attr_name;
+                        array_push($term_objects, $term_object);
+                    }
+                }
+            }
+        }
+        $response = (object)[];
+        $response = my_array_unique($term_objects);
+        wp_send_json( $response , 200 );
+    }
+    wp_send_json_error('Ошибка');
+}
+
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'optiko/v1/', '/get-terms-by-category', array(
+          'methods' => WP_REST_Server::READABLE,
+          'callback' => 'getTermByCategory',
+      ) );
+});

@@ -1,0 +1,41 @@
+<div class="catalog-content-right">
+	<div class="catalog-filter-title">
+	<span>Фильтр</span>
+	<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 160 160" class="plus">
+		<path d="M70 0h20v160H70z" class="vertical-line"></path>
+		<path d="M0 70h160v20H0z" class="horizontal-line"></path>
+	</svg>
+	</div>
+	<div class="catalog-filter-content">
+		<div class="filter-prices">
+			<div class="filter-prices-name">Цена</div>
+			<div class="filter-prices-value">
+                      <div class="range-multiple_input">
+                          <span>от </span>
+                          <input type="number" name="price_min" class="input-default" value="0" placeholder="0" data-range-start="0" data-default-value="0">
+                      </div>
+                      <div class="range-multiple_input field--filled">
+                          <span>до </span>
+                          <input type="number" name="price_max" class="input-default" value="1000000" placeholder="1000000" data-range-end="1000000" data-default-value="1000000">
+                      </div>
+			</div>
+		</div>
+		<div class="filter-categories">
+			<div class="filter-categories-name">Категории</div>
+
+			<div class="control-group">
+				{% for item in 0..3 %}
+				    <label class="control control-checkbox">
+			        Модульные
+			            <input type="checkbox" checked="checked" />
+			        <div class="control_indicator"></div>
+			    </label>
+				{% endfor %}
+			</div>
+		</div>
+		<sidebar-block-item title="Цвет" v-model="cvet" storevalue="cvet"></sidebar-block-item>
+		<div class="filter-row">
+			
+		</div>
+	</div>
+</div>

@@ -101,6 +101,9 @@ var galleryThumbs = new Swiper('.gallery-thumbs', {
 
 });
 
+import sidebarBlockItem from './components/sidebarBlockItem.vue';
+Vue.component('sidebar-block-item', sidebarBlockItem);
+
 import ProductList from './components/ProductList.vue';
 Vue.component('product-list', ProductList);
 
@@ -185,6 +188,38 @@ const app = new Vue({
         product_colors: [],
         colorPicked: '',
         main_thumbnail: '',
+        cvet: [],
+        dlina: [],
+        dlina_max: [],
+        dvuxyarusnye: [],
+        forma: [],
+        glubina: [],
+        material_fasada: [],
+        material_karkasa: [],
+        material_obivki: [],
+        mexanizm: [],
+        napolnenie: [],
+        obivka: [],
+        osnovanie: [],
+        osobennosti: [],
+        raskladka: [],
+        raskladnoj: [],
+        razmer: [],
+        s_yashhikom: [],
+        shirina: [],
+        sidene: [],
+        so_spalnym_mestom: [],
+        spalnoe_mesto_dlina: [],
+        spalnoe_mesto_shirina: [], 
+        stil: [],
+        stoleshnica: [],
+        strana_proizvodstva: [],
+        tip: [],
+        tolshhina: [],
+        vid: [],
+        vysota: [],
+        zamki: [],
+        zhestkost: [],
     },
     watch: {},
     components: {
@@ -248,25 +283,39 @@ const app = new Vue({
     },
     async mounted() {
         this.loading = true;
-        if (this.is_product) {
-            const requestDataProduct = {
-                url: SITEDATA.url + '/wp-json/wc/v3/products/' + SITEDATA.product_id,
-                method: 'GET'
-            };
-            const urlProduct = requestDataProduct.url;
-            const responseProduct = await fetch(urlProduct);
-            const dataProduct = await responseProduct.json();
-            this.product_colors = dataProduct.acf.product_colors;
-            if(this.product_colors){
-                this.colorPicked = this.product_colors[0].title;
-            }
-            if (dataProduct.images && dataProduct.images[0]) {
-                this.main_thumbnail = dataProduct.images[0].woocommerce_single;
+
+
+        function RequestDataAttributesByCategory(taxonomy_id, attr_name) {
+                this.taxonomy_id = taxonomy_id;
+                this.attr_name = attr_name;
+                this.url = `${SITEDATA.url}/wp-json/optiko/v1/get-terms-by-category?taxonomy_id=${taxonomy_id}&attr_name=${attr_name}`;
+                this.method = 'GET';
+                Object.defineProperty(this, "data", {
+                    get: function () {
+                        return {
+                            url: this.url,
+                            method: this.method
+                        };
+                    }
+                });
             }
 
-    
+            async function getAttributeProduct(taxonomy_id, attr_name) {
+                const requestData = new RequestDataAttributesByCategory(taxonomy_id, attr_name);
+                const url = `${requestData.url}`;
+                const response = await fetch(url);
+                const data = await response.json();
+                return data;
+            }
 
-        }
+
+        if (SITEDATA.category_slug || SITEDATA.is_filter) {
+                [this.cvet] = await Promise.all([
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_cvet'),
+                ]);
+
+            }
+
         this.loading = false;
     },
 
