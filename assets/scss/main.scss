@@ -1339,16 +1339,17 @@ body.single-product .card-info{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: space-between;
     padding: 0 15px;
 }
 .control {
-    font-family: arial;
+   /* font-family: arial;*/
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     position: relative;
     padding-left: 42px;
-    margin-bottom: 5px;
+   /* margin-bottom: 5px;*/
     padding-top: 3px;
     cursor: pointer;
     font-size: 14px;
@@ -1512,6 +1513,26 @@ td.product-remove {
 }
 td.product-thumbnail {
     width: 218px;
+}
+.vue-slider {
+    width: 100%!important;
+    margin-top: 13px;
+}
+.vue-slider-dot {
+    position: absolute;
+    -webkit-transition: all 0s;
+    transition: all 0s;
+    z-index: 5;
+    height: 22px!important;
+    width: 22px!important;
+    background-color: #A90E2D;
+    border-radius: 50%;
+}
+.vue-slider-process {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    background-color: #a90e2d;
 }
 @import 'pages/home';
 @import 'components/buttons';

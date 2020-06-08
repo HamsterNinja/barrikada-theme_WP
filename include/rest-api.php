@@ -100,7 +100,39 @@ function getProducts(WP_REST_Request $request) {
         $current_paged = $_GET['paged'];
         $include = $_GET['include'];
         
-        $current_colors = $_GET['colors'] ? explode( ',', $_GET['colors']) : [];   
+        $current_colors = $_GET['colors'] ? explode( ',', $_GET['colors']) : [];
+        $cvet = $_GET['cvet'] ? explode( ',', $_GET['cvet']) : [];
+        $dlina = $_GET['dlina'] ? explode( ',', $_GET['dlina']) : [];
+        $dlina_max = $_GET['dlina_max'] ? explode( ',', $_GET['dlina_max']) : [];
+        $dvuxyarusnye = $_GET['dvuxyarusnye'] ? explode( ',', $_GET['dvuxyarusnye']) : [];
+        $forma = $_GET['forma'] ? explode( ',', $_GET['forma']) : [];
+        $glubina = $_GET['glubina'] ? explode( ',', $_GET['glubina']) : [];
+        $material_fasada = $_GET['material_fasada'] ? explode( ',', $_GET['material_fasada']) : [];
+        $material_karkasa = $_GET['material_karkasa'] ? explode( ',', $_GET['material_karkasa']) : [];
+        $material_obivki = $_GET['material_obivki'] ? explode( ',', $_GET['material_obivki']) : [];
+        $mexanizm = $_GET['mexanizm'] ? explode( ',', $_GET['mexanizm']) : [];
+        $napolnenie = $_GET['napolnenie'] ? explode( ',', $_GET['napolnenie']) : [];
+        $obivka = $_GET['obivka'] ? explode( ',', $_GET['obivka']) : [];
+        $osnovanie = $_GET['osnovanie'] ? explode( ',', $_GET['osnovanie']) : [];
+        $osobennosti = $_GET['osobennosti'] ? explode( ',', $_GET['osobennosti']) : [];
+        $raskladka = $_GET['raskladka'] ? explode( ',', $_GET['raskladka']) : [];
+        $raskladnoj = $_GET['raskladnoj'] ? explode( ',', $_GET['raskladnoj']) : [];
+        $razmer = $_GET['razmer'] ? explode( ',', $_GET['razmer']) : [];
+        $s_yashhikom = $_GET['s_yashhikom'] ? explode( ',', $_GET['s_yashhikom']) : [];
+        $shirina = $_GET['shirina'] ? explode( ',', $_GET['shirina']) : [];
+        $sidene = $_GET['sidenes'] ? explode( ',', $_GET['sidene']) : [];
+        $so_spalnym_mestom = $_GET['so_spalnym_mestom'] ? explode( ',', $_GET['so_spalnym_mestom']) : [];
+        $spalnoe_mesto_dlina = $_GET['spalnoe_mesto_dlina'] ? explode( ',', $_GET['spalnoe_mesto_dlina']) : [];
+        $spalnoe_mesto_shirina = $_GET['spalnoe_mesto_shirina'] ? explode( ',', $_GET['spalnoe_mesto_shirina']) : [];
+        $stil = $_GET['stil'] ? explode( ',', $_GET['stil']) : [];
+        $stoleshnica = $_GET['stoleshnica'] ? explode( ',', $_GET['stoleshnica']) : [];
+        $strana_proizvodstva = $_GET['strana_proizvodstva'] ? explode( ',', $_GET['strana_proizvodstva']) : [];
+        $tip = $_GET['tip'] ? explode( ',', $_GET['tip']) : [];
+        $tolshhina = $_GET['tolshhina'] ? explode( ',', $_GET['tolshhina']) : [];
+        $vid = $_GET['vid'] ? explode( ',', $_GET['vid']) : [];
+        $vysota = $_GET['vysota'] ? explode( ',', $_GET['vysota']) : [];
+        $zamki = $_GET['zamki'] ? explode( ',', $_GET['zamki']) : [];
+        $zhestkost = $_GET['zhestkost'] ? explode( ',', $_GET['zhestkost']) : [];
      
         $args = array(
             'post_status' => 'publish',
@@ -133,7 +165,281 @@ function getProducts(WP_REST_Request $request) {
             );
             array_push($args['tax_query'], $request_params); 
         }
-   
+        
+        if (isset($cvet)  && !(empty($cvet))) {
+            $request_params = array(
+                'taxonomy' => 'pa_cvet',
+                'field' => 'slug',
+                'terms' => $cvet,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+
+        if (isset($dlina)  && !(empty($dlina))) {
+            $request_params = array(
+                'taxonomy' => 'pa_dlina',
+                'field' => 'slug',
+                'terms' => $dlina,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+
+        if (isset($dlina_max)  && !(empty($dlina_max))) {
+            $request_params = array(
+                'taxonomy' => 'pa_dlina-max',
+                'field' => 'slug',
+                'terms' => $dlina_max,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+
+        if (isset($dvuxyarusnye)  && !(empty($dvuxyarusnye))) {
+            $request_params = array(
+                'taxonomy' => 'pa_dvuxyarusnye',
+                'field' => 'slug',
+                'terms' => $dvuxyarusnye,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+
+        if (isset($forma)  && !(empty($forma))) {
+            $request_params = array(
+                'taxonomy' => 'pa_forma',
+                'field' => 'slug',
+                'terms' => $forma,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+
+        if (isset($glubina)  && !(empty($glubina))) {
+            $request_params = array(
+                'taxonomy' => 'pa_glubina',
+                'field' => 'slug',
+                'terms' => $glubina,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+
+        if (isset($material_fasada)  && !(empty($material_fasada))) {
+            $request_params = array(
+                'taxonomy' => 'pa_material-fasada',
+                'field' => 'slug',
+                'terms' => $material_fasada,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+
+        if (isset($material_karkasa)  && !(empty($material_karkasa))) {
+            $request_params = array(
+                'taxonomy' => 'pa_material-karkasa',
+                'field' => 'slug',
+                'terms' => $material_karkasa,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+
+        if (isset($material_obivki)  && !(empty($material_obivki))) {
+            $request_params = array(
+                'taxonomy' => 'pa_material-obivki',
+                'field' => 'slug',
+                'terms' => $material_obivki,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+
+        if (isset($mexanizm)  && !(empty($mexanizm))) {
+            $request_params = array(
+                'taxonomy' => 'pa_mexanizm',
+                'field' => 'slug',
+                'terms' => $mexanizm,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+
+        if (isset($napolnenie)  && !(empty($napolnenie))) {
+            $request_params = array(
+                'taxonomy' => 'pa_napolnenie',
+                'field' => 'slug',
+                'terms' => $napolnenie,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+
+        if (isset($obivka)  && !(empty($obivka))) {
+            $request_params = array(
+                'taxonomy' => 'pa_obivka',
+                'field' => 'slug',
+                'terms' => $obivka,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+
+        if (isset($osnovanie)  && !(empty($osnovanie))) {
+            $request_params = array(
+                'taxonomy' => 'pa_osnovanie',
+                'field' => 'slug',
+                'terms' => $osnovanie,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+
+        if (isset($osobennosti)  && !(empty($osobennosti))) {
+            $request_params = array(
+                'taxonomy' => 'pa_osobennosti',
+                'field' => 'slug',
+                'terms' => $osobennosti,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+
+        if (isset($raskladka)  && !(empty($raskladka))) {
+            $request_params = array(
+                'taxonomy' => 'pa_raskladka',
+                'field' => 'slug',
+                'terms' => $raskladka,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+
+        if (isset($raskladnoj)  && !(empty($raskladnoj))) {
+            $request_params = array(
+                'taxonomy' => 'pa_raskladnoj',
+                'field' => 'slug',
+                'terms' => $raskladnoj,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+
+        if (isset($razmer)  && !(empty($razmer))) {
+            $request_params = array(
+                'taxonomy' => 'pa_razmer',
+                'field' => 'slug',
+                'terms' => $razmer,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+
+        if (isset($s_yashhikom)  && !(empty($s_yashhikom))) {
+            $request_params = array(
+                'taxonomy' => 'pa_s-yashhikom',
+                'field' => 'slug',
+                'terms' => $s_yashhikom,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+        if (isset($shirina)  && !(empty($shirina))) {
+            $request_params = array(
+                'taxonomy' => 'pa_shirina',
+                'field' => 'slug',
+                'terms' => $shirina,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+        if (isset($sidene)  && !(empty($sidene))) {
+            $request_params = array(
+                'taxonomy' => 'pa_sidene',
+                'field' => 'slug',
+                'terms' => $sidene,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+        if (isset($so_spalnym_mestom)  && !(empty($so_spalnym_mestom))) {
+            $request_params = array(
+                'taxonomy' => 'pa_so-spalnym-mestom',
+                'field' => 'slug',
+                'terms' => $so_spalnym_mestom,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+        if (isset($spalnoe_mesto_dlina)  && !(empty($spalnoe_mesto_dlina))) {
+            $request_params = array(
+                'taxonomy' => 'pa_spalnoe-mesto-dlina',
+                'field' => 'slug',
+                'terms' => $spalnoe_mesto_dlina,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+        if (isset($spalnoe_mesto_shirina)  && !(empty($spalnoe_mesto_shirina))) {
+            $request_params = array(
+                'taxonomy' => 'pa_spalnoe-mesto-shirina',
+                'field' => 'slug',
+                'terms' => $spalnoe_mesto_shirina,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+        if (isset($stil)  && !(empty($stil))) {
+            $request_params = array(
+                'taxonomy' => 'pa_stil',
+                'field' => 'slug',
+                'terms' => $stil,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+        if (isset($stoleshnica)  && !(empty($stoleshnica))) {
+            $request_params = array(
+                'taxonomy' => 'pa_stoleshnica',
+                'field' => 'slug',
+                'terms' => $stoleshnica,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+        if (isset($strana_proizvodstva)  && !(empty($strana_proizvodstva))) {
+            $request_params = array(
+                'taxonomy' => 'pa_strana-proizvodstva',
+                'field' => 'slug',
+                'terms' => $strana_proizvodstva,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+        if (isset($tip)  && !(empty($tip))) {
+            $request_params = array(
+                'taxonomy' => 'pa_tip',
+                'field' => 'slug',
+                'terms' => $tip,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+        if (isset($tolshhina)  && !(empty($tolshhina))) {
+            $request_params = array(
+                'taxonomy' => 'pa_tolshhina',
+                'field' => 'slug',
+                'terms' => $tolshhina,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+        if (isset($vid)  && !(empty($vid))) {
+            $request_params = array(
+                'taxonomy' => 'pa_vid',
+                'field' => 'slug',
+                'terms' => $vid,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+        if (isset($vysota)  && !(empty($vysota))) {
+            $request_params = array(
+                'taxonomy' => 'pa_vysota',
+                'field' => 'slug',
+                'terms' => $vysota,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+        if (isset($zamki)  && !(empty($zamki))) {
+            $request_params = array(
+                'taxonomy' => 'pa_zamki',
+                'field' => 'slug',
+                'terms' => $zamki,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+        if (isset($zhestkost)  && !(empty($zhestkost))) {
+            $request_params = array(
+                'taxonomy' => 'pa_zhestkost',
+                'field' => 'slug',
+                'terms' => $zhestkost,
+            );
+            array_push($args['tax_query'], $request_params); 
+        }
+
         $result = new WP_Query($args);
         $products = [];
         function price_array($price){
@@ -240,10 +546,16 @@ function getTermByCategory(WP_REST_Request $request) {
 
         if($taxonomyID !== 'null'){
             $args = array(
-                'category' => array( $taxonomyID ),
                 'numberposts' => -1,
                 'post_status' => 'published',
                 'post_type' => 'product',
+                'tax_query' => array(
+                array(
+                'taxonomy' => 'product_cat',
+                'field' => 'slug',
+                'terms' => $taxonomyID
+                )
+                )
             );
         }
         else{

@@ -54,30 +54,37 @@
 		</div>
 		<div class="sidebar-menu">
 			<ul>
-				{% for item in 0..19 %}
+				{% for parent_category in Term(main_categories) %}
 				<li>
-					<a href="{{ site.link }}/product-category/katalog/"><img src="{{ site.theme.link }}/assets/images/cat-1.png" alt=""><span>Кухонные гарнитуры</span></a>
+					<a href="{{ parent_category.link }}"><img src="{{ site.theme.link }}/assets/images/cat-1.png" alt=""><span>{{ parent_category.title }}</span></a>
+					{% if parent_category.directChildren %}
 					<ul class="sub-menu">
-						{% for item in 0..6 %}    
+						
+						{% for category in parent_category.directChildren %}    
 						<li>
-							<a href="">Кухонные комплектующие</a>
+							<a href="{{ category.link }}">{{ category.title }}</a>
+							{% if category.directChildren %}
 							<ul class="sub-menu">
-								{% for item in 0..3 %}    
+								{% for subcategory in category.directChildren %}    
 								<li>
-									<a href="{{ site.link }}/product-category/katalog/">Мойки</a>
+									<a href="{{ subcategory.link }}">{{ subcategory.title }}</a>
+									{% if subcategory.directChildren %}
 									<ul class="sub-menu">
-										{% for item in 0..1 %}    
+										{% for subsubcategory in subcategory.directChildren %}    
 										<li>
-											<a href="{{ site.link }}/product-category/katalog/">Нержавейка</a>
+											<a href="{{ site.link }}/product-category/katalog/">{{ subsubcategory.title }}</a>
 										</li>
 										{% endfor %}
 									</ul>
+									{% endif %}
 								</li>
 								{% endfor %}
 							</ul>
+							{% endif %}
 						</li>
 						{% endfor %}
 					</ul>
+					{% endif %}
 				</li>
 				{% endfor %}
 				<li>

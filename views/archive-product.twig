@@ -12,11 +12,12 @@
 		<div class="catalog-content-left">
 			<div class="catalog-sort">
 				<div class="catalog-sort-text">Сортировать по:</div>
-				<select name="" id="">
-					<option value="">Популярсности</option>
-					<option value="">От дешевых к дорогим</option>
-					<option value="">От дорогих к дешевым</option>
-				</select>
+				<select class="archive-header-controls__select select-gray" aria-label="Виды сортировки" name="order_by" v-model="itemsOrderBy">
+                    <option {{ current_items_order_by =='ASC' ? 'selected' : ''}} value="ASC">Имя</option>
+                    <option {{ current_items_order_by =='new' ? 'selected' : ''}} value="new">Новинки</option>
+                    <option {{ current_items_order_by =='by_price_max' ? 'selected' : ''}} value="by_price_max">По убыванию цены</option>
+                    <option {{ current_items_order_by =='by_price_min' ? 'selected' : ''}} value="by_price_min">По возрастанию цены</option>
+                </select>
 			</div>
 			<div class="actions-banner_block">
 				<img src="{{ site.theme.link }}/assets/images/action.jpg" alt="">

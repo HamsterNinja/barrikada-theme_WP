@@ -1,24 +1,17 @@
 <template>
     <div class="sidebar-block-item" :class="classname" v-if="value.length !== 0">
-        <div class="sidebar-block-item__title sidebar-block-item__title--toggle">
+        <div class="sidebar-block-item__title sidebar-block-item__title--toggle filter-categories-name">
             <span class="name-block">{{ title }}</span>
             <tooltip v-if="tooltip" :show="false" color="747474" >{{tooltip}}</tooltip>
-            <button class="button button--sidebar-block-item-title" aria-label="Раскрыть" v-on:click="collapseFields">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 160 160" :class="{ 'minus': !collapsed, 'plus': collapsed }">
-                    <path d="M70 0h20v160H70z" class="vertical-line"/>
-                    <path d="M0 70h160v20H0z" class="horizontal-line"/>
-                </svg>
-            </button>
+                <svg width="15" height="10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9l6.5-7L14 9" stroke="#333" stroke-width="2"/></svg>
         </div>
         <transition-group name="sidebar-block-item-field" tag="div" class="sidebar-block-item-fields" :class="{ 'is-collapsed': collapsed, 'is-expanded': expanded }">
-            <div class="sidebar-block-item-field" v-for="(item, index) in value" :key="item.name">
-                <label class="container-checkbox">
+            <div class="sidebar-block-item-field control-group" v-for="(item, index) in value" :key="item.name">
+                <label class="control control-checkbox">
+                    {{ item.name }}
                     <input type="checkbox" :value="item.slug" v-model="checkedItems" :aria-label='item.name'>
-                    <span class="checkmark"></span>
-                    <span class="sidebar-block-item-field__image" :style="[item.image ? {marginRight: '6px'} : {marginRight: '0px'}]">
-                        <img v-if="item.image" :src="item.image" alt="">         
-                    </span>
-                    <span class="sidebar-block-item-field__title">{{ item.name }}</span>
+                    <div class="control_indicator"></div>
+                    <span class="sidebar-block-item-field__title"></span>
                     <span class="sidebar-block-item-field__count"></span>
                 </label>
             </div>

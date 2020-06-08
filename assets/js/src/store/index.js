@@ -9,6 +9,7 @@ const set = key => (state, val) => {
 
 const store = new Vuex.Store({
     state: {
+        rangePrice: [SITEDATA.min_price_per_product_cat, SITEDATA.max_price_per_product_cat], 
         favorites: [],
         viewedProducts: [],
         cartSubtotal: parseFloat(SITEDATA.cart_subtotal),
@@ -30,6 +31,7 @@ const store = new Vuex.Store({
         catalogWidths: [],
         catalogMaterials: [],
 
+        catalogItemsOrderBy: 'ASC',
 
         cvet: [],
         dlina: [],
@@ -97,6 +99,8 @@ favorites: state.favorites,
         updateCatalogWidths: set('catalogWidths'),
         updateCatalogMaterials: set('catalogMaterials'),
         updateFavorites: set('favorites'),
+        updateRangePrice: set('rangePrice'),
+        updateCatalogItemsOrderBy: set('catalogItemsOrderBy'),
 
         updateCvet: set('cvet'),
         updateDlina: set('dlina'),
@@ -163,7 +167,7 @@ favorites: state.favorites,
             try {
             commit('ALL_PRODUCTS');
             let catalogCategory = this.state.catalogCategory !=='null' ? this.state.catalogCategory: '';
-            let rangePrice = this.state.catalogPrices;
+            let rangePrice = this.state.rangePrice;
             let catalogColors = this.state.catalogColors;
             let catalogSizes = this.state.catalogSizes;
             let catalogMaterials = this.state.catalogMaterials;
@@ -171,7 +175,42 @@ favorites: state.favorites,
             let catalogWidths = this.state.catalogWidths;
             let searchString = this.state.searchString;
             let catalogSort = this.state.catalogSort;
-            let searchData = `product-cat=${catalogCategory}&sizes=${catalogSizes}&materials=${catalogMaterials}&colors=${catalogColors}&paged=${catalogPaged}&widths=${catalogWidths}&range_price=${rangePrice}&sort=${catalogSort}`;
+            let cvet = this.state.cvet;
+            let dlina = this.state.dlina;
+            let dlina_max = this.state.dlina_max;
+            let dvuxyarusnye = this.state.dvuxyarusnye;
+            let forma = this.state.forma;
+            let glubina = this.state.glubina;
+            let material_fasada = this.state.material_fasada;
+            let material_karkasa = this.state.material_karkasa;
+            let material_obivki = this.state.material_obivki;
+            let mexanizm = this.state.mexanizm;
+            let napolnenie = this.state.napolnenie;
+            let obivka = this.state.obivka;
+            let osnovanie = this.state.osnovanie;
+            let osobennosti = this.state.osobennosti;
+            let raskladka = this.state.raskladka;
+            let raskladnoj = this.state.raskladnoj;
+            let razmer = this.state.razmer;
+            let s_yashhikom = this.state.s_yashhikom;
+            let shirina = this.state.shirina;
+            let sidene = this.state.sidene;
+            let so_spalnym_mestom = this.state.so_spalnym_mestom;
+            let spalnoe_mesto_dlina = this.state.spalnoe_mesto_dlina;
+            let spalnoe_mesto_shirina = this.state.spalnoe_mesto_shirina;
+            let stil = this.state.stil;
+            let stoleshnica = this.state.stoleshnica;
+            let strana_proizvodstva = this.state.strana_proizvodstva;
+            let tip = this.state.tip;
+            let tolshhina = this.state.tolshhina;
+            let vid = this.state.vid;
+            let vysota = this.state.vysota;
+            let zamki = this.state.zamki;
+            let zhestkost = this.state.zhestkost;
+
+            let catalogItemsOrderBy = this.state.catalogItemsOrderBy;
+            
+            let searchData = `product-cat=${catalogCategory}&order_by=${catalogItemsOrderBy}&range_price=${rangePrice}&sizes=${catalogSizes}&materials=${catalogMaterials}&colors=${catalogColors}&paged=${catalogPaged}&widths=${catalogWidths}&range_price=${rangePrice}&sort=${catalogSort}&cvet=${cvet}&dlina=${dlina}&dlina_max=${dlina_max}&dvuxyarusnye=${dvuxyarusnye}&forma=${forma}&glubina=${glubina}&material_fasada=${material_fasada}&material_karkasa=${material_karkasa}&material_obivki=${material_obivki}&mexanizm=${mexanizm}&napolnenie=${napolnenie}&obivka=${obivka}&osnovanie=${osnovanie}&osobennosti=${osobennosti}&raskladka=${raskladka}&raskladnoj=${raskladnoj}&razmer=${razmer}&s_yashhikom=${s_yashhikom}&shirina=${shirina}&sidene=${sidene}&so_spalnym_mestom=${so_spalnym_mestom}&spalnoe_mesto_dlina=${spalnoe_mesto_dlina}&spalnoe_mesto_shirina=${spalnoe_mesto_shirina}&stil=${stil}&stoleshnica=${stoleshnica}&strana_proizvodstva=${strana_proizvodstva}&tip=${tip}&tolshhina=${tolshhina}&vid=${vid}&vysota=${vysota}&zamki=${zamki}&zhestkost=${zhestkost}`;
             let responseProducts = "";
 
 

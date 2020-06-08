@@ -113,6 +113,9 @@ Vue.component('product-item', productItem);
 import countProduct from './components/countProduct.vue'
 Vue.component('count-product', countProduct);
 
+import VueSlider from 'vue-slider-component';
+Vue.component('vue-slider', VueSlider);
+
 document.addEventListener('DOMContentLoaded', () => {
     modalViews.init();
     formSubmitListeners.init();
@@ -220,6 +223,8 @@ const app = new Vue({
         vysota: [],
         zamki: [],
         zhestkost: [],
+        rangePriceMin: parseInt(SITEDATA.min_price_per_product_cat),
+        rangePriceMax: parseInt(SITEDATA.max_price_per_product_cat),
     },
     watch: {},
     components: {
@@ -238,10 +243,27 @@ const app = new Vue({
                 }
             },
         },
+        itemsOrderBy: {
+            get() {
+                return this.$store.state.catalogItemsOrderBy
+            },
+            set(value) {
+                this.$store.commit('updateCatalogItemsOrderBy', value);
+                this.applyFilter();
+            }
+        },
         favorites: {
             get() {
                 return this.$store.state.favorites
             },
+        },
+        rangePrice: {
+            get() {
+                return this.$store.state.rangePrice
+            },
+            set(value) {
+                this.$store.commit('updateRangePrice', value);
+            }
         },
         viewedProducts: {
             get() {
@@ -310,8 +332,39 @@ const app = new Vue({
 
 
         if (SITEDATA.category_slug || SITEDATA.is_filter) {
-                [this.cvet] = await Promise.all([
+                [this.cvet,this.dlina,this.dlina_max,this.dvuxyarusnye,this.forma,this.glubina,this.material_fasada,this.material_karkasa,this.material_obivki,this.mexanizm,this.napolnenie,this.obivka,this.osnovanie,this.osobennosti,this.raskladka,this.raskladnoj,this.razmer,this.s_yashhikom,this.shirina,this.sidene,this.so_spalnym_mestom,this.spalnoe_mesto_dlina,this.spalnoe_mesto_shirina,this.stil,this.stoleshnica,this.strana_proizvodstva,this.tip,this.tolshhina,this.vid,this.vysota,this.zamki,this.zhestkost] = await Promise.all([
                     getAttributeProduct(SITEDATA.category_slug, 'pa_cvet'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_dlina'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_dlina-max'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_dvuxyarusnye'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_forma'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_glubina'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_material-fasada'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_material-karkasa'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_material-obivki'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_mexanizm'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_napolnenie'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_obivka'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_osnovanie'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_osobennosti'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_raskladka'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_raskladnoj'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_razmer'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_s-yashhikom'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_shirina'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_sidene'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_so_spalnym-mestom'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_spalnoe-mesto-dlina'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_spalnoe-mesto-shirina'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_stil'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_stoleshnica'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_strana-proizvodstva'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_tip'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_tolshhina'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_vid'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_vysota'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_zamki'),
+                    getAttributeProduct(SITEDATA.category_slug, 'pa_zhestkost'),
                 ]);
 
             }
@@ -324,6 +377,33 @@ const app = new Vue({
             this.$store.commit('clearFavorites');
             this.favorite_products = [];
         },
+
+        resetFilters(){                 
+            this.$store.commit('updateCatalogColors', []);                 
+            this.$store.commit('updateCatalogColorsLense', []);                 
+            this.$store.commit('updateCatalogTypesGlasses', []);                 
+            this.$store.commit('updateCatalogGenders', []);                 
+            this.$store.commit('updateCatalogShapes', []);                 
+            this.$store.commit('updateCatalogTypesRim', []);                 
+            this.$store.commit('updateCatalogMaterials', []);                 
+            this.$store.commit('updateCatalogSizes', []);                 
+            this.$store.commit('updateCatalogBrands', []);                 
+            this.$store.commit('updateCatalogItemsOrderBy', 'ASC');                 
+            this.$store.commit('updateCatalogBrandsLenses', []);                 
+            this.$store.commit('updateCatalogTypeOfContactLenses', []);                 
+            this.$store.commit('updateCatalogContactLensShapes', []);                 
+            this.$store.commit('updateRangePrice', [SITEDATA.min_price_per_product_cat, SITEDATA.max_price_per_product_cat]);                 
+            this.$store.commit('updateRangeTempleLength', [SITEDATA.rangeTempleLengthMin, SITEDATA.rangeTempleLengthMax]);                
+            this.$store.commit('updateRangeLensWidth', [SITEDATA.rangeLensWidthMin, SITEDATA.rangeLensWidthMax]);                 
+            this.applyFilter();                 
+        },
+
+        applyFilter(){
+            this.open_mobile_menu_filters = false;
+            store.dispatch('allProducts');
+        },
+
+
         selectPage(pageNum){
                     this.pageNum = pageNum;
                     this.$store.commit('updatePageNum', pageNum);

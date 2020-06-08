@@ -18,7 +18,9 @@
                           <span>до </span>
                           <input type="number" name="price_max" class="input-default" value="1000000" placeholder="1000000" data-range-end="1000000" data-default-value="1000000">
                       </div>
+                     <vue-slider v-model="rangePrice" :tooltip="'none'" :enable-cross="false" :interval="500" :min="rangePriceMin" :max="rangePriceMax"></vue-slider>
 			</div>
+
 		</div>
 		<div class="filter-categories">
 			<div class="filter-categories-name">Категории</div>
@@ -33,9 +35,102 @@
 				{% endfor %}
 			</div>
 		</div>
-		<sidebar-block-item title="Цвет" v-model="cvet" storevalue="cvet"></sidebar-block-item>
+
 		<div class="filter-row">
-			
+			<sidebar-block-item title="Цвет" v-model="cvet" storevalue="cvet"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Длина" v-model="dlina" storevalue="dlina"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Длина max" v-model="dlina_max" storevalue="dlina_max"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Двухъярусные" v-model="dvuxyarusnye" storevalue="dvuxyarusnye"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Форма" v-model="forma" storevalue="forma"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Глубина" v-model="glubina" storevalue="glubina"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Материал фасада" v-model="material_fasada" storevalue="material_fasada"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Материал каркаса" v-model="material_karkasa" storevalue="material_karkasa"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Материал обивки" v-model="material_obivki" storevalue="material_obivki"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Механизм" v-model="mexanizm" storevalue="mexanizm"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Наполнение" v-model="napolnenie" storevalue="napolnenie"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Обивка" v-model="obivka" storevalue="obivka"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Основание" v-model="osnovanie" storevalue="osnovanie"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Особенности" v-model="osobennosti" storevalue="osobennosti"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Раскладка" v-model="raskladka" storevalue="raskladka"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Раскладной" v-model="raskladnoj" storevalue="raskladnoj"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Размер" v-model="razmer" storevalue="razmer"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="С ящиком" v-model="s_yashhikom" storevalue="s_yashhikom"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Ширина" v-model="shirina" storevalue="shirina"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Сиденье" v-model="sidene" storevalue="sidene"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Со спальным местом" v-model="so_spalnym_mestom" storevalue="so_spalnym_mestom"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Длина спального места" v-model="spalnoe_mesto_dlina" storevalue="spalnoe_mesto_dlina"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Ширина спального места" v-model="spalnoe_mesto_shirina" storevalue="spalnoe_mesto_shirina"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Стиль" v-model="stil" storevalue="stil"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Столешница" v-model="stoleshnica" storevalue="stoleshnica"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Страна производства" v-model="strana_proizvodstva" storevalue="strana_proizvodstva"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Тип" v-model="tip" storevalue="tip"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Толщина" v-model="tolshhina" storevalue="tolshhina"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Вид" v-model="vid" storevalue="vid"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Высота" v-model="vysota" storevalue="vysota"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Замки" v-model="zamki" storevalue="zamki"></sidebar-block-item>
+		</div>
+		<div class="filter-row">
+			<sidebar-block-item title="Жесткость" v-model="zhestkost" storevalue="zhestkost"></sidebar-block-item>
 		</div>
 	</div>
 </div>
