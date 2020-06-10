@@ -61,27 +61,33 @@
 					<ul class="sub-menu">
 						
 						{% for category in parent_category.children %}    
-						<li>
-							<a href="{{ category.link }}">{{ category.title }}</a>
-							{% if category.children %}
-							<ul class="sub-menu">
-								{% for subcategory in category.children %}    
+							{% if category.parent == parent_category.term_id %}
 								<li>
-									<a href="{{ subcategory.link }}">{{ subcategory.title }}</a>
-									{% if subcategory.children %}
+									<a href="{{ category.link }}">{{ category.title }}</a>
+									{% if category.children %}
 									<ul class="sub-menu">
-										{% for subsubcategory in subcategory.children %}    
-										<li>
-											<a href="{{ site.link }}/product-category/katalog/">{{ subsubcategory.title }}</a>
-										</li>
+										{% for subcategory in category.children %}
+											
+											{% if subcategory.parent == category.term_id %}
+											<li>
+												<a href="{{ subcategory.link }}">{{ subcategory.title }}</a>
+												{% if subcategory.children %}
+												<ul class="sub-menu">
+													{% for subsubcategory in subcategory.children %}    
+													<li>
+														<a href="{{ site.link }}/product-category/katalog/">{{ subsubcategory.title }}</a>
+													</li>
+													{% endfor %}
+												</ul>
+												{% endif %}
+											</li>
+											{% endif %}
+
 										{% endfor %}
 									</ul>
 									{% endif %}
 								</li>
-								{% endfor %}
-							</ul>
 							{% endif %}
-						</li>
 						{% endfor %}
 					</ul>
 					{% endif %}
