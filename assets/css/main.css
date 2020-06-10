@@ -359,6 +359,148 @@ img {
 .main-content {
   flex-grow: 1;
 }
+/* modals */
+.alModal {
+  width: 96%;
+  max-width: 350px;
+  height: auto;
+  display: none;
+  position: fixed;
+  z-index: 100;
+  font-family: sans-serif;
+  opacity: 0;
+  top: 100%;
+  left: 50%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+span.alModalClose:before {
+  display: block;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: #fff;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  top: 42%;
+}
+.alModalClose {
+  cursor: pointer;
+  width: 20px;
+  display: block;
+  text-align: center;
+  float: right;
+  position: absolute;
+  top: -25px;
+  right: -25px;
+  z-index: 101;
+  color: #fff;
+  font-size: 12px;
+  height: 20px;
+  line-height: 26px;
+  font-family: sans-serif;
+}
+span.alModalClose:after {
+  display: block;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: #fff;
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  top: 42%;
+  left: 0%;
+}
+.alModalClose:hover {
+  color: #fff;
+}
+.alModal p {
+  position: relative;
+  display: block;
+  text-align: left;
+  color: #000;
+  margin: 0px;
+  font-size: 16px;
+  line-height: 1.4;
+  padding: 0px 5px;
+  margin-bottom: 15px;
+}
+.alModalThank {
+  max-width: 500px;
+}
+.alModal .thank_ico {
+  color: #42ad41;
+  padding: 10px 10px 0;
+  font-size: 50px;
+  display: inline-block;
+  line-height: 1;
+  border-radius: 50%;
+  width: 65px;
+  text-align: center;
+  height: 65px;
+  font-weight: bold;
+  vertical-align: middle;
+}
+.alModal .thank_words {
+  display: inline-block;
+  color: #333;
+  padding-left: 15px;
+  line-height: 1.4;
+  font-size: 17px;
+  width: 73%;
+  vertical-align: middle;
+}
+.overlay {
+  z-index: 70;
+  position: fixed;
+  background-color: #000;
+  opacity: 0.8;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  display: none;
+}
+.alModalContent {
+  padding: 15px 22px;
+  background: #fff;
+}
+.alModalContent .alModalInput {
+  font-size: 18px;
+  font-weight: 500;
+  color: #34343a;
+  width: 100%;
+  padding: 9px 19px;
+  border: 1px solid #e8e8e8;
+  margin-bottom: 15px;
+}
+.alModal .alModalButton {
+  width: 100%;
+  display: inline-block;
+  background-color: #a90e2d;
+  border: 1px solid #a90e2d;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  padding: 13px 24px;
+  transition: 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0px 3px 4px 1px rgba(88, 179, 156, 0.2);
+}
+.alModal .alModalButton:hover {
+  color: #a90e2d;
+  background-color: #fff;
+}
+/* modals */
 /* hamburger */
 .btn-hamburger {
   display: block;

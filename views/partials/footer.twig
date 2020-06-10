@@ -2,7 +2,7 @@
 	<div class="footer_nav">
 		<div class="main-header-callback">
      		<a class="main-header-phone" href="tel:+7 000 000 00 00">+7 000 000 00 00</a>
-     		<a class="main-header-callback-link" href="">Перезвоните мне</a>
+     		<a class="main-header-callback-link js_alModal" data-modal="js_modal-1" href="">Перезвоните мне</a>
      	</div>
    		<button class="btn-hamburger-2 js_hamburger-2">Меню</button>
    		<button class="btn-hamburger btn-hamburger-1 js_hamburger">
@@ -14,8 +14,150 @@
 	<div class="copyright">© 2020 Мебельный магазин</div>
 	<a href="" class="footer-link">Разработано <img src="{{ site.theme.link }}/assets/images/isart.svg" alt=""></a>
 </div>
+<div class="overlay"></div>
+    <div class="alModal js_modal-1">
+        <span class="alModalClose js_alModalClose"></span>
+        <div class="alModalContent alModalContent--modal">
+            <p>Оставьте свои контакты, мы обязательно вам перезвоним.</p>
+            <form action="javascript:void(0);" id="alxModalForm1">
+                <input required="" name="name" class="alModalInput alModalInputName" type="text" placeholder="Представьтесь">
+                <input required="" name="phone" class="alModalInput alModalInputphone" type="tel" placeholder="Укажите номер телефона">
+                <input type="submit" class="modal alModalButton" name="--" value="Перезвонить мне">
+            </form>
+        </div>
+    </div>
+    <div class="alModal js_modal-2">
+        <span class="alModalClose js_alModalClose"></span>
+        <div class="alModalContent alModalContent--modal">
+            <p>Оставьте свои контакты, мы обязательно вам перезвоним.</p>
+            <form action="javascript:void(0);" id="alxModalForm2">
+                <input type="hidden" name="theme" value="{{ post.title }}">
+                <input required="" name="name" class="alModalInput alModalInputName" type="text" placeholder="Представьтесь">
+                <input required="" name="phone" class="alModalInput alModalInputphone" type="tel" placeholder="Укажите номер телефона">
+                <input type="submit" class="modal alModalButton" name="--" value="Заказать">
+            </form>
+        </div>
+    </div>
+    <div class="alModal alModalThank js_modal-3">
+        <span class="alModalClose js_alModalClose"></span>
+        <div class="alModalContent">
+            <div class="thank_ico">✓</div>
+            <div class="thank_words">Ваша заявка принята<br>Мы свяжемся с вами в ближайшее время</div> 
+        </div>
+    </div>
 </footer>
 </div>
 </body>
 {{ function('wp_footer') }}
+<script type="text/javascript">
+function showModal(modalName) {
+        $('.overlay').fadeIn(500,
+            function() {
+                var ModalLeft = ($(window).width() - $(modalName).outerWidth()) / 2;
+                var ModalTop = (window.innerHeight - $(modalName).outerHeight()) / 2;
+                $(modalName).removeAttr('css');
+                if (ModalTop <= 50) {
+                    ModalTop = 20;
+                    
+                }
+                setTimeout(function() {
+                    $(modalName)
+                        .css('display', 'block')
+                        .animate({
+                            opacity: 1,
+                            left: ModalLeft + 'px',
+                            top: ModalTop + 'px'
+                        }, 300);
+                }, 50)
+            });
+    }
+jQuery(document).ready(function($) {
+    var ModalTop;
+  
+
+    
+    $(window).resize(function(event) {
+        if ($('.alModal').is(':visible')) showModal('.alModal:visible');
+    });
+
+
+$(document).on('click', '.js_alModal', function(){ 
+        event.preventDefault();
+        var modalClass = '.' + $(this).attr('data-modal');
+        showModal(modalClass); 
+});
+
+    $('.js_alModalClose, .overlay').click(function() {
+        $('.alModal').animate({
+                opacity: 0
+            }, 200,
+            function() {
+                $(this).css({
+                    'display': 'none',
+                    'top': '100%',
+                    'left': '50%'
+                });
+                $('.overlay').fadeOut(400);
+            }
+        );
+    });
+
+
+
+       $('#alxModalForm1').submit(function() {
+        if (document.forms.alxModalForm1.checkValidity()) {
+            var thisModal = $(this).parents('.alModal');
+            form = $('#alxModalForm1').serialize();
+            $.ajax({
+                type: "POST",
+                url: "<? echo get_site_url(); ?>/obr.php",
+                data: form,
+                success: function(msg) {
+                    thisModal.animate({
+                            opacity: 0
+                        }, 200,
+                        function() {
+                            $(this).css({
+                                'display': 'none',
+                                'top': '100%',
+                                'left': '50%'
+                            });
+                        }
+                    );
+                    thisModal.find('.alModalInput').val('');
+                    thisModal.find('textarea').val('');
+                    showModal('.alModalThank');
+                }
+            });
+        }
+    });
+       $('#alxModalForm2').submit(function() {
+        if (document.forms.alxModalForm2.checkValidity()) {
+            var thisModal = $(this).parents('.alModal');
+            form = $('#alxModalForm2').serialize();
+            $.ajax({
+                type: "POST",
+                url: "<? echo get_site_url(); ?>/obr.php",
+                data: form,
+                success: function(msg) {
+                    thisModal.animate({
+                            opacity: 0
+                        }, 200,
+                        function() {
+                            $(this).css({
+                                'display': 'none',
+                                'top': '100%',
+                                'left': '50%'
+                            });
+                        }
+                    );
+                    thisModal.find('.alModalInput').val('');
+                    thisModal.find('textarea').val('');
+                    showModal('.alModalThank');
+                }
+            });
+        }
+    });
+});
+</script>
 </html>
