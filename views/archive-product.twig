@@ -3,9 +3,9 @@
 <div class="catalog-content">
 	<div class="container">
 		<div class="catalog-header">
-			<nav class="woocommerce-breadcrumb"><a href="">Главная</a>&nbsp;/&nbsp;Каталог</nav>
+			{{ function('woocommerce_breadcrumb') }}
 			<div class="catalog-title">
-				<h1>МЕБЕЛЬ ДЛЯ СПАЛЬНИ</h1>
+				<h1>{{ title }}</h1>
 				<hr class="catalog-title-decore">
 			</div>
 		</div>

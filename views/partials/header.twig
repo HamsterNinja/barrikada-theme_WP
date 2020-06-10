@@ -57,20 +57,20 @@
 				{% for parent_category in Term(main_categories) %}
 				<li>
 					<a href="{{ parent_category.link }}"><img src="{{ site.theme.link }}/assets/images/cat-1.png" alt=""><span>{{ parent_category.title }}</span></a>
-					{% if parent_category.directChildren %}
+					{% if parent_category.children %}
 					<ul class="sub-menu">
 						
-						{% for category in parent_category.directChildren %}    
+						{% for category in parent_category.children %}    
 						<li>
 							<a href="{{ category.link }}">{{ category.title }}</a>
-							{% if category.directChildren %}
+							{% if category.children %}
 							<ul class="sub-menu">
-								{% for subcategory in category.directChildren %}    
+								{% for subcategory in category.children %}    
 								<li>
 									<a href="{{ subcategory.link }}">{{ subcategory.title }}</a>
-									{% if subcategory.directChildren %}
+									{% if subcategory.children %}
 									<ul class="sub-menu">
-										{% for subsubcategory in subcategory.directChildren %}    
+										{% for subsubcategory in subcategory.children %}    
 										<li>
 											<a href="{{ site.link }}/product-category/katalog/">{{ subsubcategory.title }}</a>
 										</li>

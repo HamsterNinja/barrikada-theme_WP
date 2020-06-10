@@ -215,22 +215,28 @@ class StarterSite extends TimberSite {
         $context['youtube'] = get_field('youtube', 'options');
 
         global $product; //Если не объявлен ранее. Не уверен в необходимости.
-        $categories = get_the_terms( $post->ID, 'product_cat' );
-        $args = array(
-            'post_type' => 'product',
-            'posts_per_page' => 10,
-            'post_parent' => 0,
-            'orderby' => 'rand',
-            'tax_query' => array(
-                'relation' => 'AND',
-                array(
-                    'taxonomy' => 'product_cat',
-                    'field' => 'term_id',
-                    'terms' => $categories[0]->term_id,
-                )
-            )   
-        );  
-      $context['other_prod'] = Timber::get_posts($args);
+
+
+       
+            $categories = get_the_terms( $post->ID, 'product_cat' );
+                $args = array(
+                'post_type' => 'product',
+                'posts_per_page' => 6,
+                'post_parent' => 0,
+                'orderby' => 'rand',
+                'tax_query' => array(
+                    'relation' => 'AND',
+                    array(
+                        'taxonomy' => 'product_cat',
+                        'field' => 'term_id',
+                        'terms' => $categories[0]->term_id,
+                    )
+                )   
+            );           
+            $recommended_products = new Timber\PostQuery($args);
+            $recommended_products_ids = wp_list_pluck( $recommended_products, 'ID' ); 
+             $context['recommended_products_ids'] = $recommended_products_ids;
+           
         $categories = get_the_terms( $post->ID, 'product_cat' );
         
         $product_brands = get_terms( array(

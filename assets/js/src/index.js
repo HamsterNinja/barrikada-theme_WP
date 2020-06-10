@@ -134,6 +134,15 @@ import store from './store';
 
 import MaskedInput from 'vue-masked-input';
 
+import ProductListNew from './components/ProductListNew.vue'
+Vue.component('product-list-new', ProductListNew);
+
+import ProductListBest from './components/ProductListBest.vue'
+Vue.component('product-list-best', ProductListBest);
+
+import productListRecommended from './components/productListRecommended.vue'
+Vue.component('product-list-best-single', productListRecommended);
+
 import favorite from './components/favorite.vue';
 Vue.component('favorite', favorite);
 
@@ -295,6 +304,17 @@ const app = new Vue({
             },
             set(value) {
                 this.$store.commit('updatePageNum', value);
+            }
+        },
+        percent: function () {
+            let productSalePrice = this.product.sale_price;
+            let productRegularPrice = this.product.regular_price;
+            if(productSalePrice && productRegularPrice){
+                let percent = Math.ceil(((productRegularPrice - productSalePrice) / productRegularPrice) * 100);
+                return percent;
+            }
+            else{
+                return 0;
             }
         },
         cartTotal: function () {
