@@ -7773,6 +7773,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_6_vue___default.a({
     setCartStep: function setCartStep(value) {
       this.cartStep = value;
     },
+    // new addCart
     addCart: function addCart(ID) {
       var _this3 = this;
 
@@ -7788,21 +7789,16 @@ var app = new __WEBPACK_IMPORTED_MODULE_6_vue___default.a({
                 formProduct = new FormData();
                 formProduct.append('action', 'add_one_product');
                 formProduct.append('product_id', ID);
-                formProduct.append('quantity', __WEBPACK_IMPORTED_MODULE_8__store__["a" /* default */].state.productCount ? __WEBPACK_IMPORTED_MODULE_8__store__["a" /* default */].state.productCount : 1); //extra options
+                formProduct.append('quantity', __WEBPACK_IMPORTED_MODULE_8__store__["a" /* default */].state.productCount ? __WEBPACK_IMPORTED_MODULE_8__store__["a" /* default */].state.productCount : 1);
+                _this3.$refs.button_cart_text.innerText = "Товар добавляется"; // extra options
 
-                formProduct.append('color', _this3.colorPicked);
-
-                if (_this3.thumbnails && _this3.thumbnails[0]) {
-                  formProduct.append('color_image', _this3.thumbnails[0].sizes.medium_large);
-                } // formProduct.append('custom_price', this.currentPrice);
-
-
+                formProduct.append('size', _this3.selectedProductSize);
                 fetchData = {
                   method: "POST",
                   body: formProduct
                 };
                 _context3.next = 10;
-                return fetch(wc_add_to_cart_params.wc_ajax_url.toString().replace('%%endpoint%%', 'add_to_cart'), fetchData);
+                return fetch(wc_add_to_cart_params.ajax_url, fetchData);
 
               case 10:
                 response = _context3.sent;
@@ -7813,31 +7809,62 @@ var app = new __WEBPACK_IMPORTED_MODULE_6_vue___default.a({
                 jsonResponse = _context3.sent;
 
                 if (jsonResponse.error != 'undefined' && jsonResponse.error) {
-                  console.log(jsonResponse.error);
+                  console.error('ошибка добавления товара');
                 } else if (jsonResponse.success) {
-                  _this3.$refs.button_cart.innerText = "В корзине";
+                  _this3.$refs.button_cart_text.innerText = "\u0422\u043E\u0432\u0430\u0440 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D";
 
                   _this3.updateFragment();
-                }
 
-                if (jsonResponse.fragments) {
-                  Array.from(jsonResponse.fragments).forEach(function (element) {
-                    element.classList.add('updating');
-                  });
-                  $.each(jsonResponse.fragments, function (key, value) {
-                    $(key).replaceWith(value);
-                    $(key).stop(true).css('opacity', '1');
-                  });
+                  setTimeout(function () {
+                    _this3.$refs.button_cart_text.innerText = "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0432 \u043A\u043E\u0440\u0437\u0438\u043D\u0443";
+                  }, 7000);
                 }
 
                 _this3.adding = false;
 
-              case 17:
+              case 16:
               case "end":
                 return _context3.stop();
             }
           }
         }, _callee3);
+      }))();
+    },
+    updateFragment: function updateFragment() {
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee4() {
+        var response, data;
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return fetch(wc_cart_fragments_params.wc_ajax_url.toString().replace('%%endpoint%%', 'get_refreshed_fragments'), {
+                  method: 'POST'
+                });
+
+              case 2:
+                response = _context4.sent;
+                _context4.next = 5;
+                return response.json();
+
+              case 5:
+                data = _context4.sent;
+
+                if (data && data.fragments) {
+                  $.each(data.fragments, function (key, value) {
+                    $(key).replaceWith(value);
+                  });
+                  $(document.body).trigger('wc_fragments_refreshed');
+                }
+
+              case 7:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
       }))();
     },
     showModal: function showModal(modalName) {

@@ -452,18 +452,20 @@ const app = new Vue({
 
 
         selectPage(pageNum){
-                    this.pageNum = pageNum;
-                    this.$store.commit('updatePageNum', pageNum);
-                    store.dispatch('allProducts');
-                    let topItems = document.querySelector("header");
-                    if (topItems){
-                    topItems.scrollIntoView({block: "start", behavior: "smooth"});
-                    }
-                },
+            this.pageNum = pageNum;
+            this.$store.commit('updatePageNum', pageNum);
+            store.dispatch('allProducts');
+            let topItems = document.querySelector("header");
+            if (topItems){
+                topItems.scrollIntoView({block: "start", behavior: "smooth"});
+            }
+        },
+
         setCartStep(value){
             this.cartStep = value;
         },
 
+        // new addCart
         async addCart(ID) {
             this.adding = true;
             let formProduct = new FormData();
@@ -471,37 +473,44 @@ const app = new Vue({
             formProduct.append('product_id', ID);
             formProduct.append('quantity', store.state.productCount ?  store.state.productCount : 1);
 
+            this.$refs.button_cart_text.innerText = "Товар добавляется"
 
-            //extra options
-            formProduct.append('color', this.colorPicked);
-            if(this.thumbnails && this.thumbnails[0]){
-                formProduct.append('color_image', this.thumbnails[0].sizes.medium_large);
-            }
-            // formProduct.append('custom_price', this.currentPrice);
-                        
+            // extra options
+            formProduct.append('size', this.selectedProductSize);
+
             let fetchData = {
                 method: "POST",
                 body: formProduct
             };
-            let response =  await fetch(wc_add_to_cart_params.wc_ajax_url.toString().replace('%%endpoint%%', 'add_to_cart'), fetchData);
+            let response = await fetch(wc_add_to_cart_params.ajax_url, fetchData);
             let jsonResponse = await response.json();
             if (jsonResponse.error != 'undefined' && jsonResponse.error) {
-                console.log(jsonResponse.error);
-            }else if (jsonResponse.success) {
-                        this.$refs.button_cart.innerText = "В корзине"
-                        this.updateFragment();
-                    }
-                    if ( jsonResponse.fragments ) {
-                Array.from(jsonResponse.fragments).forEach(element => {
-                    element.classList.add('updating');
-                });
-                $.each( jsonResponse.fragments, function( key, value ) {
-                    $( key ).replaceWith( value );
-                    $( key ).stop( true ).css( 'opacity', '1' );
-                });
+                console.error('ошибка добавления товара');
+            } else if (jsonResponse.success) {
+                this.$refs.button_cart_text.innerText = `Товар добавлен`
+                this.updateFragment();
+                setTimeout(()=>{
+                    this.$refs.button_cart_text.innerText = `Добавить в корзину`
+                }, 7000);
             }
             this.adding = false;
-        }, 
+        },
+
+        async updateFragment(){
+            let response = await fetch(
+                wc_cart_fragments_params.wc_ajax_url.toString().replace( '%%endpoint%%', 'get_refreshed_fragments' ), 
+                {
+                    method: 'POST',
+                }
+            );
+            let data = await response.json();
+                if ( data && data.fragments ) {
+                    $.each( data.fragments, function( key, value ) {
+                        $( key ).replaceWith( value );                            
+                    }); 
+                $( document.body ).trigger( 'wc_fragments_refreshed' );
+            }
+        },
 
         showModal: (modalName) => {
             const currentModal = document.querySelector(`.${modalName}`);
