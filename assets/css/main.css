@@ -1151,6 +1151,7 @@ body.single-product .card-info {
   grid-gap: 1px;
   margin-bottom: 10px;
   margin-top: 15px;
+  position: relative;
 }
 .catalog-content .product-card {
   display: block;

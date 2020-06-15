@@ -425,6 +425,11 @@ const app = new Vue({
             this.favorite_products = [];
         },
 
+        showMoreProducts(){
+            this.$store.commit('updatePageNum', this.pageNum + 1);
+            this.applyFilter();
+        },
+
         resetFilters(){                 
             this.$store.commit('updateCatalogColors', []);                 
             this.$store.commit('updateCatalogColorsLense', []);                 

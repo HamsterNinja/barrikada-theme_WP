@@ -7746,6 +7746,10 @@ var app = new __WEBPACK_IMPORTED_MODULE_6_vue___default.a({
       this.$store.commit('clearFavorites');
       this.favorite_products = [];
     },
+    showMoreProducts: function showMoreProducts() {
+      this.$store.commit('updatePageNum', this.pageNum + 1);
+      this.applyFilter();
+    },
     resetFilters: function resetFilters() {
       this.$store.commit('updateCatalogColors', []);
       this.$store.commit('updateCatalogColorsLense', []);
@@ -26522,7 +26526,7 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     product: {},
     products: [],
     category_count: '',
-    category_count_page: 21,
+    category_count_page: 12,
     searchString: SITEDATA.search_query,
     catalogSort: '',
     catalogPrices: [],
@@ -26665,7 +26669,7 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
       return _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee() {
-        var commit, isAttibute, catalogCategory, rangePrice, catalogColors, catalogSizes, catalogMaterials, catalogPaged, catalogWidths, searchString, catalogSort, cvet, dlina, dlina_max, dvuxyarusnye, forma, glubina, material_fasada, material_karkasa, material_obivki, mexanizm, napolnenie, obivka, osnovanie, osobennosti, raskladka, raskladnoj, razmer, s_yashhikom, shirina, sidene, so_spalnym_mestom, spalnoe_mesto_dlina, spalnoe_mesto_shirina, stil, stoleshnica, strana_proizvodstva, tip, tolshhina, vid, vysota, zamki, zhestkost, catalogItemsOrderBy, searchData, responseProducts, pathArray, pathArrayFiltered, AttibuteParametr, AttibuteValue, product_name, dataProducts;
+        var commit, isAttibute, catalogCategory, rangePrice, catalogColors, catalogSizes, catalogMaterials, catalogPaged, catalogWidths, searchString, catalogSort, cvet, dlina, dlina_max, dvuxyarusnye, forma, glubina, material_fasada, material_karkasa, material_obivki, mexanizm, napolnenie, obivka, osnovanie, osobennosti, raskladka, raskladnoj, razmer, s_yashhikom, shirina, sidene, so_spalnym_mestom, spalnoe_mesto_dlina, spalnoe_mesto_shirina, stil, stoleshnica, strana_proizvodstva, tip, tolshhina, vid, vysota, zamki, zhestkost, per_page, catalogItemsOrderBy, searchData, responseProducts, pathArray, pathArrayFiltered, AttibuteParametr, AttibuteValue, product_name, dataProducts;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -26726,8 +26730,9 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
                 vysota = _this.state.vysota;
                 zamki = _this.state.zamki;
                 zhestkost = _this.state.zhestkost;
+                per_page = _this.state.category_count_page;
                 catalogItemsOrderBy = _this.state.catalogItemsOrderBy;
-                searchData = "product-cat=".concat(catalogCategory, "&order_by=").concat(catalogItemsOrderBy, "&range_price=").concat(rangePrice, "&sizes=").concat(catalogSizes, "&materials=").concat(catalogMaterials, "&colors=").concat(catalogColors, "&paged=").concat(catalogPaged, "&widths=").concat(catalogWidths, "&range_price=").concat(rangePrice, "&sort=").concat(catalogSort, "&cvet=").concat(cvet, "&dlina=").concat(dlina, "&dlina_max=").concat(dlina_max, "&dvuxyarusnye=").concat(dvuxyarusnye, "&forma=").concat(forma, "&glubina=").concat(glubina, "&material_fasada=").concat(material_fasada, "&material_karkasa=").concat(material_karkasa, "&material_obivki=").concat(material_obivki, "&mexanizm=").concat(mexanizm, "&napolnenie=").concat(napolnenie, "&obivka=").concat(obivka, "&osnovanie=").concat(osnovanie, "&osobennosti=").concat(osobennosti, "&raskladka=").concat(raskladka, "&raskladnoj=").concat(raskladnoj, "&razmer=").concat(razmer, "&s_yashhikom=").concat(s_yashhikom, "&shirina=").concat(shirina, "&sidene=").concat(sidene, "&so_spalnym_mestom=").concat(so_spalnym_mestom, "&spalnoe_mesto_dlina=").concat(spalnoe_mesto_dlina, "&spalnoe_mesto_shirina=").concat(spalnoe_mesto_shirina, "&stil=").concat(stil, "&stoleshnica=").concat(stoleshnica, "&strana_proizvodstva=").concat(strana_proizvodstva, "&tip=").concat(tip, "&tolshhina=").concat(tolshhina, "&vid=").concat(vid, "&vysota=").concat(vysota, "&zamki=").concat(zamki, "&zhestkost=").concat(zhestkost);
+                searchData = "product-cat=".concat(catalogCategory, "&order_by=").concat(catalogItemsOrderBy, "&per_page=").concat(per_page, "&range_price=").concat(rangePrice, "&sizes=").concat(catalogSizes, "&materials=").concat(catalogMaterials, "&colors=").concat(catalogColors, "&paged=").concat(catalogPaged, "&widths=").concat(catalogWidths, "&range_price=").concat(rangePrice, "&sort=").concat(catalogSort, "&cvet=").concat(cvet, "&dlina=").concat(dlina, "&dlina_max=").concat(dlina_max, "&dvuxyarusnye=").concat(dvuxyarusnye, "&forma=").concat(forma, "&glubina=").concat(glubina, "&material_fasada=").concat(material_fasada, "&material_karkasa=").concat(material_karkasa, "&material_obivki=").concat(material_obivki, "&mexanizm=").concat(mexanizm, "&napolnenie=").concat(napolnenie, "&obivka=").concat(obivka, "&osnovanie=").concat(osnovanie, "&osobennosti=").concat(osobennosti, "&raskladka=").concat(raskladka, "&raskladnoj=").concat(raskladnoj, "&razmer=").concat(razmer, "&s_yashhikom=").concat(s_yashhikom, "&shirina=").concat(shirina, "&sidene=").concat(sidene, "&so_spalnym_mestom=").concat(so_spalnym_mestom, "&spalnoe_mesto_dlina=").concat(spalnoe_mesto_dlina, "&spalnoe_mesto_shirina=").concat(spalnoe_mesto_shirina, "&stil=").concat(stil, "&stoleshnica=").concat(stoleshnica, "&strana_proizvodstva=").concat(strana_proizvodstva, "&tip=").concat(tip, "&tolshhina=").concat(tolshhina, "&vid=").concat(vid, "&vysota=").concat(vysota, "&zamki=").concat(zamki, "&zhestkost=").concat(zhestkost);
                 responseProducts = "";
                 pathArray = window.location.pathname.split('/');
                 pathArrayFiltered = pathArray.filter(function (el) {
@@ -26738,109 +26743,110 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
                 commit('updateLoadingProducts', true);
 
                 if (!(SITEDATA.category_slug || SITEDATA.is_shop === 'true')) {
-                  _context.next = 60;
+                  _context.next = 61;
                   break;
                 }
 
                 console.log('glasse branch');
-                _context.next = 57;
+                _context.next = 58;
                 return fetch("".concat(SITEDATA.url, "/wp-json/amadreh/v1/get-products/?").concat(searchData));
 
-              case 57:
+              case 58:
                 responseProducts = _context.sent;
-                _context.next = 87;
+                _context.next = 88;
                 break;
 
-              case 60:
+              case 61:
                 if (!(SITEDATA.category_slug && !(SITEDATA.is_filter === 'true'))) {
-                  _context.next = 67;
+                  _context.next = 68;
                   break;
                 }
 
                 console.log('filter branch');
-                _context.next = 64;
+                _context.next = 65;
                 return fetch("".concat(SITEDATA.url, "/wp-json/amadreh/v1/get-products/?").concat(searchData, "&product-cat=").concat(SITEDATA.category_slug, "&paged=").concat(catalogPaged));
 
-              case 64:
+              case 65:
                 responseProducts = _context.sent;
-                _context.next = 87;
+                _context.next = 88;
                 break;
 
-              case 67:
+              case 68:
                 if (!SITEDATA.current_brand) {
-                  _context.next = 74;
+                  _context.next = 75;
                   break;
                 }
 
                 console.log('current_brand branch');
-                _context.next = 71;
+                _context.next = 72;
                 return fetch("".concat(SITEDATA.url, "/wp-json/amadreh/v1/get-products/?brands=").concat(SITEDATA.current_brand, "&paged=").concat(catalogPaged, "&order_by=").concat(catalogItemsOrderBy));
 
-              case 71:
+              case 72:
                 responseProducts = _context.sent;
-                _context.next = 87;
+                _context.next = 88;
                 break;
 
-              case 74:
+              case 75:
                 if (!(AttibuteParametr && AttibuteValue)) {
-                  _context.next = 81;
+                  _context.next = 82;
                   break;
                 }
 
                 console.log('AttibuteParametr branch');
-                _context.next = 78;
+                _context.next = 79;
                 return fetch("".concat(SITEDATA.url, "/wp-json/amadreh/v1/get-products/?").concat(AttibuteParametr, "=").concat(AttibuteValue, "&paged=").concat(catalogPaged, "&order_by=").concat(catalogItemsOrderBy));
 
-              case 78:
+              case 79:
                 responseProducts = _context.sent;
-                _context.next = 87;
+                _context.next = 88;
                 break;
 
-              case 81:
+              case 82:
                 if (!(SITEDATA.is_search === 'true')) {
-                  _context.next = 87;
+                  _context.next = 88;
                   break;
                 }
 
                 console.log('search branch');
                 product_name = searchString;
-                _context.next = 86;
+                _context.next = 87;
                 return fetch("".concat(SITEDATA.url, "/wp-json/amadreh/v1/get-products?search=").concat(product_name, "&").concat(searchData));
 
-              case 86:
+              case 87:
                 responseProducts = _context.sent;
 
-              case 87:
+              case 88:
                 if (!responseProducts) {
-                  _context.next = 94;
+                  _context.next = 96;
                   break;
                 }
 
-                _context.next = 90;
+                _context.next = 91;
                 return responseProducts.json();
 
-              case 90:
+              case 91:
                 dataProducts = _context.sent;
-                commit('ALL_PRODUCTS_SUCCESS', dataProducts.data.posts);
+                console.log();
+                commit('ALL_PRODUCTS_SUCCESS', dataProducts.data.posts.concat(_this.state.products));
                 commit('updateCategoryCount', dataProducts.data.found_posts);
                 commit('updateCategoryCountPage', Math.ceil(dataProducts.data.found_posts / 16));
 
-              case 94:
+              case 96:
                 commit('updateLoadingProducts', false);
-                _context.next = 100;
+                _context.next = 102;
                 break;
 
-              case 97:
-                _context.prev = 97;
+              case 99:
+                _context.prev = 99;
                 _context.t0 = _context["catch"](1);
                 console.error(_context.t0);
 
-              case 100:
+              case 102:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 97]]);
+        }, _callee, null, [[1, 99]]);
       }))();
     }
   }

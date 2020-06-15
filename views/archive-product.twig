@@ -23,7 +23,7 @@
 				<img src="{{ site.theme.link }}/assets/images/action.jpg" alt="">
 			</div>
 			<product-list></product-list>
-			<a href="" class="view-all">Показать ещё</a>
+			<a href="#" @click.prevent="showMoreProducts" class="view-all">Показать ещё</a>
 		</div>
 		{% include "partials/sidebar.twig" %}
 	</div>

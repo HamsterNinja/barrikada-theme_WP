@@ -21,7 +21,7 @@ const store = new Vuex.Store({
         product: {},
         products: [],
         category_count: '',
-        category_count_page: 21,
+        category_count_page: 12,
         searchString: SITEDATA.search_query,
         
         catalogSort: '',
@@ -212,9 +212,11 @@ favorites: state.favorites,
             let zamki = this.state.zamki;
             let zhestkost = this.state.zhestkost;
 
+            let per_page = this.state.category_count_page;
+
             let catalogItemsOrderBy = this.state.catalogItemsOrderBy;
             
-            let searchData = `product-cat=${catalogCategory}&order_by=${catalogItemsOrderBy}&range_price=${rangePrice}&sizes=${catalogSizes}&materials=${catalogMaterials}&colors=${catalogColors}&paged=${catalogPaged}&widths=${catalogWidths}&range_price=${rangePrice}&sort=${catalogSort}&cvet=${cvet}&dlina=${dlina}&dlina_max=${dlina_max}&dvuxyarusnye=${dvuxyarusnye}&forma=${forma}&glubina=${glubina}&material_fasada=${material_fasada}&material_karkasa=${material_karkasa}&material_obivki=${material_obivki}&mexanizm=${mexanizm}&napolnenie=${napolnenie}&obivka=${obivka}&osnovanie=${osnovanie}&osobennosti=${osobennosti}&raskladka=${raskladka}&raskladnoj=${raskladnoj}&razmer=${razmer}&s_yashhikom=${s_yashhikom}&shirina=${shirina}&sidene=${sidene}&so_spalnym_mestom=${so_spalnym_mestom}&spalnoe_mesto_dlina=${spalnoe_mesto_dlina}&spalnoe_mesto_shirina=${spalnoe_mesto_shirina}&stil=${stil}&stoleshnica=${stoleshnica}&strana_proizvodstva=${strana_proizvodstva}&tip=${tip}&tolshhina=${tolshhina}&vid=${vid}&vysota=${vysota}&zamki=${zamki}&zhestkost=${zhestkost}`;
+            let searchData = `product-cat=${catalogCategory}&order_by=${catalogItemsOrderBy}&per_page=${per_page}&range_price=${rangePrice}&sizes=${catalogSizes}&materials=${catalogMaterials}&colors=${catalogColors}&paged=${catalogPaged}&widths=${catalogWidths}&range_price=${rangePrice}&sort=${catalogSort}&cvet=${cvet}&dlina=${dlina}&dlina_max=${dlina_max}&dvuxyarusnye=${dvuxyarusnye}&forma=${forma}&glubina=${glubina}&material_fasada=${material_fasada}&material_karkasa=${material_karkasa}&material_obivki=${material_obivki}&mexanizm=${mexanizm}&napolnenie=${napolnenie}&obivka=${obivka}&osnovanie=${osnovanie}&osobennosti=${osobennosti}&raskladka=${raskladka}&raskladnoj=${raskladnoj}&razmer=${razmer}&s_yashhikom=${s_yashhikom}&shirina=${shirina}&sidene=${sidene}&so_spalnym_mestom=${so_spalnym_mestom}&spalnoe_mesto_dlina=${spalnoe_mesto_dlina}&spalnoe_mesto_shirina=${spalnoe_mesto_shirina}&stil=${stil}&stoleshnica=${stoleshnica}&strana_proizvodstva=${strana_proizvodstva}&tip=${tip}&tolshhina=${tolshhina}&vid=${vid}&vysota=${vysota}&zamki=${zamki}&zhestkost=${zhestkost}`;
             let responseProducts = "";
 
 
@@ -264,7 +266,8 @@ favorites: state.favorites,
             
             if(responseProducts){
                 const dataProducts = await responseProducts.json();
-                commit('ALL_PRODUCTS_SUCCESS', dataProducts.data.posts);
+                console.log();
+                commit('ALL_PRODUCTS_SUCCESS',  dataProducts.data.posts.concat(this.state.products));
                 commit('updateCategoryCount', dataProducts.data.found_posts);
                 commit('updateCategoryCountPage', Math.ceil(dataProducts.data.found_posts / 16));
             }

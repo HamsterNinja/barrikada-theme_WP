@@ -103,6 +103,8 @@ function getProducts(WP_REST_Request $request) {
         $include = $_GET['include'];
 
         $current_range_price = $_GET['range_price'];
+
+        $current_per_page = $_GET['per_page'];
         
         $current_colors = $_GET['colors'] ? explode( ',', $_GET['colors']) : [];
         $cvet = $_GET['cvet'] ? explode( ',', $_GET['cvet']) : [];
@@ -142,7 +144,7 @@ function getProducts(WP_REST_Request $request) {
             'post_status' => 'publish',
             'post_type' => array('product', 'product_variation'),
             'post_type' => 'product',
-            'posts_per_page' => 16,  
+            'posts_per_page' => $current_per_page ? $current_per_page : 12,  
             's' => $current_search,
             'paged' => ( $current_paged ? $current_paged : 1 ),
         );
