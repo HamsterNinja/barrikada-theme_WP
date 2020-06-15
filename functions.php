@@ -261,7 +261,7 @@ class StarterSite extends TimberSite {
             $categories = get_the_terms( $post->ID, 'product_cat' );
                 $args = array(
                 'post_type' => 'product',
-                'posts_per_page' => 6,
+                'posts_per_page' => 60,
                 'post_parent' => 0,
                 'orderby' => 'rand',
                 'tax_query' => array(
@@ -275,7 +275,7 @@ class StarterSite extends TimberSite {
             );           
             $recommended_products = new Timber\PostQuery($args);
             $recommended_products_ids = wp_list_pluck( $recommended_products, 'ID' ); 
-             $context['recommended_products_ids'] = $recommended_products_ids;
+            $context['recommended_products_ids'] = $recommended_products_ids;
            
         $categories = get_the_terms( $post->ID, 'product_cat' );
         

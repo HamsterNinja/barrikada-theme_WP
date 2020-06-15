@@ -6411,11 +6411,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   updated: function updated() {},
+  computed: {
+    loadedProducts: function loadedProducts() {
+      return this.products.slice(0, this.perPage);
+    }
+  },
+  methods: {
+    showMore: function showMore() {
+      console.log('helloi');
+      this.perPage = this.perPage + 3;
+    }
+  },
   data: function data() {
     return {
       loading: true,
       products: [],
-      site_url: SITEDATA.url
+      site_url: SITEDATA.url,
+      perPage: 6
     };
   }
 });
@@ -28081,7 +28093,7 @@ var render = function() {
         attrs: { name: "products", tag: "section" }
       },
       [
-        _vm._l(_vm.products, function(product, index) {
+        _vm._l(_vm.loadedProducts, function(product, index) {
           return _vm.products.length > 0
             ? [
                 _c("product-item", {
@@ -28096,9 +28108,20 @@ var render = function() {
       2
     ),
     _vm._v(" "),
-    _c("a", { staticClass: "view-all view-more", attrs: { href: "" } }, [
-      _vm._v("Показать еще")
-    ])
+    _c(
+      "a",
+      {
+        staticClass: "view-all view-more",
+        attrs: { href: "#" },
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            return _vm.showMore($event)
+          }
+        }
+      },
+      [_vm._v("Показать еще")]
+    )
   ])
 }
 var staticRenderFns = []

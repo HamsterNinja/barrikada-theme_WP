@@ -2,11 +2,11 @@
     <div class="similar-products">
         <div class="similar-products-title">Похожие товары</div>
         <div name="products" tag="section" class="similar-products-inner">
-            <template v-if="products.length > 0" v-for="(product, index) in products" >
+            <template v-if="products.length > 0" v-for="(product, index) in loadedProducts" >
                 <product-item :product="product" :class="classItem" :key='index'></product-item>
             </template>
         </div> 
-        <a href="" class="view-all view-more">Показать еще</a>      
+        <a href="#" @click.prevent="showMore" class="view-all view-more">Показать еще</a>      
     </div>
 </template>
         
@@ -35,11 +35,23 @@
     updated() {
 
     },
+    computed: {
+        loadedProducts(){
+            return this.products.slice(0, this.perPage)
+        }
+    },
+    methods: {
+        showMore(){
+            console.log('helloi')
+            this.perPage = this.perPage + 3
+        },
+    },
     data() {
         return {
             loading: true,
             products: [],
             site_url: SITEDATA.url,
+            perPage: 6,
         };
     }
   }
