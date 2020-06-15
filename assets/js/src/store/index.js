@@ -99,7 +99,7 @@ favorites: state.favorites,
         updateCatalogWidths: set('catalogWidths'),
         updateCatalogMaterials: set('catalogMaterials'),
         updateFavorites: set('favorites'),
-        updateRangePrice: set('rangePrice'),
+        
         updateCatalogItemsOrderBy: set('catalogItemsOrderBy'),
 
         updateCvet: set('cvet'),
@@ -134,6 +134,10 @@ favorites: state.favorites,
         updateVysota: set('vysota'),
         updateZamki: set('zamki'),
         updateZhestkost: set('zhestkost'),
+
+        updateRangePrice(state, value) {
+            state.rangePrice = value
+        },
 
         updateViewedProducts(state, value) {
             state.viewedProducts = value

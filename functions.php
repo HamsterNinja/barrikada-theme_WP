@@ -97,6 +97,7 @@ function time_enqueuer($my_handle, $relpath, $type='script', $async='false', $me
     else if($type == 'style') wp_enqueue_style($my_handle, $uri, $my_deps, $vsn, $media);      
 }
 
+
 add_action('wp_footer', 'add_scripts');
 function add_scripts() {
     time_enqueuer('jquerylatest', '/assets/js/vendors/jquery-3.2.0.min.js', 'script', true);
@@ -137,6 +138,43 @@ function add_scripts() {
         $user_url = $user->get('user_url');
     }
 
+    //Самая низкая цена в категории
+    function get_min_price_per_product_cat( $term_id ) {
+        global $wpdb;
+        $sql = "
+        SELECT MIN( meta_value+0 ) as minprice
+        FROM {$wpdb->posts} 
+        INNER JOIN {$wpdb->term_relationships} ON ({$wpdb->posts}.ID = {$wpdb->term_relationships}.object_id)
+        INNER JOIN {$wpdb->postmeta} ON ({$wpdb->posts}.ID = {$wpdb->postmeta}.post_id) 
+        WHERE 
+        ( {$wpdb->term_relationships}.term_taxonomy_id IN (%d) ) 
+        AND {$wpdb->posts}.post_type = 'product' 
+        AND {$wpdb->posts}.post_status = 'publish' 
+        AND {$wpdb->postmeta}.meta_key = '_price'
+        "; 
+        return $wpdb->get_var( $wpdb->prepare( $sql, $term_id ) );
+    };
+
+    //Самая высокая цена в категории
+    function get_max_price_per_product_cat( $term_id ) {
+        global $wpdb;
+        $sql = "
+        SELECT MAX( meta_value+0 ) as maxprice
+        FROM {$wpdb->posts} 
+        INNER JOIN {$wpdb->term_relationships} ON ({$wpdb->posts}.ID = {$wpdb->term_relationships}.object_id)
+        INNER JOIN {$wpdb->postmeta} ON ({$wpdb->posts}.ID = {$wpdb->postmeta}.post_id) 
+        WHERE 
+        ( {$wpdb->term_relationships}.term_taxonomy_id IN (%d) ) 
+        AND {$wpdb->posts}.post_type = 'product' 
+        AND {$wpdb->posts}.post_status = 'publish' 
+        AND {$wpdb->postmeta}.meta_key = '_price'
+        "; 
+        return $wpdb->get_var( $wpdb->prepare( $sql, $term_id ) );
+    };
+
+    $min_price_per_product_cat = get_min_price_per_product_cat($term_id);
+    $max_price_per_product_cat = round(get_max_price_per_product_cat($term_id), -3);
+
     wp_localize_script( 'app-main', 'SITEDATA', array(
         'url' => get_site_url(),
         'themepath' => get_template_directory_uri(),
@@ -155,6 +193,8 @@ function add_scripts() {
         'paged' => $paged ,
         'nonce_like' => $nonce_like ,
         'ajax_noncy_nonce' =>  wp_create_nonce( 'noncy_nonce' ),
+        'min_price_per_product_cat' => $min_price_per_product_cat ? $min_price_per_product_cat : 0,
+        'max_price_per_product_cat' => $max_price_per_product_cat ? $max_price_per_product_cat : 100000,
     ));
 }
 

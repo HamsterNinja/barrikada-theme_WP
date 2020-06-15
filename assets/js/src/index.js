@@ -232,14 +232,40 @@ const app = new Vue({
         vysota: [],
         zamki: [],
         zhestkost: [],
+
         rangePriceMin: parseInt(SITEDATA.min_price_per_product_cat),
         rangePriceMax: parseInt(SITEDATA.max_price_per_product_cat),
+
     },
     watch: {},
     components: {
         'masked-input': MaskedInput,
     },
     computed: {
+        rangePriceMinEditable:{
+            get () {
+                return this.rangePrice[0]
+            },
+            set(value) {
+                this.$store.commit('updateRangePrice', [value, this.rangePrice[1]]) 
+                this.$root.applyFilter()
+                
+            }
+        },
+
+        rangePriceMaxEditable:{
+            get () {
+                return this.rangePrice[1]
+            },
+            set(value) {
+                this.$store.commit('updateRangePrice', [this.rangePrice[0]], value)
+                this.$root.applyFilter()
+
+            }
+        },
+
+
+
         cartSubtotal:{
             get () {
                 return this.$store.state.cartSubtotal
@@ -272,6 +298,7 @@ const app = new Vue({
             },
             set(value) {
                 this.$store.commit('updateRangePrice', value);
+                this.$root.applyFilter();
             }
         },
         viewedProducts: {

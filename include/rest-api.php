@@ -99,6 +99,8 @@ function getProducts(WP_REST_Request $request) {
         $current_items_order_by = $_GET['order_by'];
         $current_paged = $_GET['paged'];
         $include = $_GET['include'];
+
+        $current_range_price = $_GET['range_price'];
         
         $current_colors = $_GET['colors'] ? explode( ',', $_GET['colors']) : [];
         $cvet = $_GET['cvet'] ? explode( ',', $_GET['cvet']) : [];
@@ -155,6 +157,22 @@ function getProducts(WP_REST_Request $request) {
                 'terms' => $current_product_cat
             );
             array_push($args['tax_query'], $request_params); 
+        }
+
+        if ( isset($current_range_price)  && !(empty($current_range_price)) ) {
+            $args['orderby'] = 'meta_value_num';
+            $args['order'] = $_GET['price'];
+            $args['meta_key'] = '_price';   
+            $prices = explode(",", $current_range_price);
+            $price_min = intval($prices[0]);
+            $price_max = intval($prices[1]);
+            $prices= array(
+                'key' => '_price',
+                'value' => array($price_min, $price_max),
+                'compare' => 'BETWEEN',
+                'type' => 'NUMERIC'
+            );
+            array_push($args['meta_query'], $prices); 
         }
 
         if (isset($current_colors)  && !(empty($current_colors))) {
