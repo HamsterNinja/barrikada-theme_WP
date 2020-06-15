@@ -6357,6 +6357,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'product-list-recommended',
   props: ['ids', 'classItem'],
@@ -28066,7 +28067,11 @@ var render = function() {
         })
       ],
       2
-    )
+    ),
+    _vm._v(" "),
+    _c("a", { staticClass: "view-all view-more", attrs: { href: "" } }, [
+      _vm._v("Показать еще")
+    ])
   ])
 }
 var staticRenderFns = []

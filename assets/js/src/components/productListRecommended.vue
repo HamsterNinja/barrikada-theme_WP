@@ -5,7 +5,8 @@
             <template v-if="products.length > 0" v-for="(product, index) in products" >
                 <product-item :product="product" :class="classItem" :key='index'></product-item>
             </template>
-        </div>       
+        </div> 
+        <a href="" class="view-all view-more">Показать еще</a>      
     </div>
 </template>
         

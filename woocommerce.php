@@ -84,6 +84,17 @@ if ( is_singular( 'product' ) ) {
         $average_product_rating = ceil( array_sum($average_rating_array) / count($average_rating_array) );
     }
     
+
+    $regular_price = $product->get_regular_price();
+    $sale_price = $product->get_sale_price();
+    $context['regular_price'] = $regular_price;
+    $context['sale_price'] = $sale_price;
+
+    if($regular_price && $sale_price){
+        $sale_percent = ($sale_price / $regular_price) * 100;
+        $context['percent'] = 100 - round($sale_percent);
+    }
+
     $context['comments'] = $comments;
     $context['average_product_rating'] = $average_product_rating ? $average_product_rating : 0;
 
