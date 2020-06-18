@@ -8116,6 +8116,10 @@ var render = function() {
             {
               staticClass:
                 "sidebar-block-item__title sidebar-block-item__title--toggle filter-categories-name",
+              class: {
+                "is-collapsed": _vm.collapsed,
+                "is-expanded": _vm.expanded
+              },
               on: { click: _vm.collapseFields }
             },
             [

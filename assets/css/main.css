@@ -1844,6 +1844,12 @@ body.single-product .card-info {
   cursor: pointer;
   user-select: none;
 }
+.sidebar-block-item__title.sidebar-block-item__title--toggle.filter-categories-name.is-collapsed svg {
+  transform: rotate(0);
+}
+.sidebar-block-item__title.sidebar-block-item__title--toggle.filter-categories-name svg {
+  transform: rotate(180deg);
+}
 span.name-block {
   width: calc(100% - 15px);
 }

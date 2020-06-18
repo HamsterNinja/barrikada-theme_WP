@@ -1,6 +1,6 @@
 <template>
     <div class="sidebar-block-item" :class="classname" v-if="value.length !== 0">
-        <div class="sidebar-block-item__title sidebar-block-item__title--toggle filter-categories-name" v-on:click="collapseFields">
+        <div class="sidebar-block-item__title sidebar-block-item__title--toggle filter-categories-name" :class="{ 'is-collapsed': collapsed, 'is-expanded': expanded }" v-on:click="collapseFields">
             <span class="name-block">{{ title }}</span>
             <tooltip v-if="tooltip" :show="false" color="747474" >{{tooltip}}</tooltip>
                 <svg width="15" height="10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9l6.5-7L14 9" stroke="#333" stroke-width="2"/></svg>
