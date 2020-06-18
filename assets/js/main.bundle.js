@@ -8088,7 +8088,8 @@ var render = function() {
             "div",
             {
               staticClass:
-                "sidebar-block-item__title sidebar-block-item__title--toggle filter-categories-name"
+                "sidebar-block-item__title sidebar-block-item__title--toggle filter-categories-name",
+              on: { click: _vm.collapseFields }
             },
             [
               _c("span", { staticClass: "name-block" }, [
@@ -8442,7 +8443,7 @@ var render = function() {
     ),
     _vm._v(" "),
     _c("div", { staticClass: "card-cat" }, [
-      _c("h3", [_vm._v(_vm._s(_vm.product.category))])
+      _c("h3", [_vm._v(_vm._s(_vm.product.categories))])
     ]),
     _vm._v(" "),
     _c(

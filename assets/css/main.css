@@ -356,6 +356,13 @@ body {
 img {
   max-width: 100%;
 }
+.vue-slider-rail {
+  width: calc(100% - 25px) !important;
+  background: #ccc;
+}
+.vue-slider-dot:last-child {
+  transform: translate(0, -50%) !important;
+}
 .main-content {
   flex-grow: 1;
 }
@@ -1195,6 +1202,12 @@ body.single-product .card-info {
   font-size: 24px;
   color: #333;
 }
+.sidebar-block-item-fields {
+  display: none;
+}
+.sidebar-block-item-fields.is-collapsed {
+  display: block;
+}
 .product-page-content {
   padding-top: 20px;
 }
@@ -1828,6 +1841,8 @@ body.single-product .card-info {
   align-items: center;
   justify-content: space-between;
   padding: 0 15px;
+  cursor: pointer;
+  user-select: none;
 }
 span.name-block {
   width: calc(100% - 15px);

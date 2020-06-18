@@ -1,6 +1,9 @@
 new UISearch( document.getElementById( 'sb-search' ) );
 
 $(document).ready(function (){
+
+
+
 $('.btn-hamburger').click(function() {    
   $('.sidebar').toggleClass('active');
   $('.main-header-menu').removeClass('active');
@@ -12,6 +15,7 @@ $('.btn-hamburger-2').click(function() {
 $('.catalog-filter-title').click(function() {    
     $('.catalog-filter-content').slideToggle();
 });
+
 $('.product-description-content').masonry({
   // options
   itemSelector: '.description-item',
