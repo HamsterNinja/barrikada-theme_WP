@@ -4726,8 +4726,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["a"] = ({
-  name: 'product-item',
+  name: "product-item",
   props: {
     product: Object
   },
@@ -4735,11 +4757,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       template_url: SITEDATA.themepath,
-      is_home: SITEDATA.is_home == 'true',
-      currentPhoto: this.product.images[0] ? this.product.images[0]['shop_single'] : ''
+      is_home: SITEDATA.is_home == "true",
+      currentPhoto: this.product.images[0] ? this.product.images[0]["shop_single"] : ""
     };
   },
   computed: {
+    categories: function categories() {
+      return this.product.categories.filter(function (category) {
+        return category.name !== "Uncategorized";
+      });
+    },
     favorites: {
       get: function get() {
         return this.$store.state.favorites;
@@ -4759,7 +4786,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   watch: {
     product: function product() {
-      this.currentPhoto = this.product.images[0] ? this.product.images[0]['shop_single'] : '';
+      this.currentPhoto = this.product.images[0] ? this.product.images[0]["shop_single"] : "";
     }
   },
   methods: {
@@ -4775,15 +4802,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 formProduct = new FormData();
-                formProduct.append('action', 'add_one_product');
-                formProduct.append('product_id', _this.product.id);
-                formProduct.append('quantity', 1);
+                formProduct.append("action", "add_one_product");
+                formProduct.append("product_id", _this.product.id);
+                formProduct.append("quantity", 1);
                 fetchData = {
                   method: "POST",
                   body: formProduct
                 };
                 _context.next = 7;
-                return fetch(wc_add_to_cart_params.wc_ajax_url.toString().replace('%%endpoint%%', 'add_to_cart'), fetchData);
+                return fetch(wc_add_to_cart_params.wc_ajax_url.toString().replace("%%endpoint%%", "add_to_cart"), fetchData);
 
               case 7:
                 response = _context.sent;
@@ -4793,19 +4820,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 10:
                 jsonResponse = _context.sent;
 
-                if (jsonResponse.error != 'undefined' && jsonResponse.error) {
+                if (jsonResponse.error != "undefined" && jsonResponse.error) {
                   console.log(jsonResponse.error);
                 } else if (jsonResponse.success) {
-                  _this.classList.add('added');
+                  _this.classList.add("added");
                 }
 
                 if (jsonResponse.fragments) {
                   Array.from(jsonResponse.fragments).forEach(function (element) {
-                    element.classList.add('updating');
+                    element.classList.add("updating");
                   });
                   $.each(jsonResponse.fragments, function (key, value) {
                     $(key).replaceWith(value);
-                    $(key).stop(true).css('opacity', '1');
+                    $(key).stop(true).css("opacity", "1");
                   });
                 }
 
@@ -8443,7 +8470,9 @@ var render = function() {
     ),
     _vm._v(" "),
     _c("div", { staticClass: "card-cat" }, [
-      _c("h3", [_vm._v(_vm._s(_vm.product.categories))])
+      _vm.product.categories && _vm.product.categories[1]
+        ? _c("h3", [_vm._v(_vm._s(_vm.product.categories[1].name))])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _c(
@@ -8460,7 +8489,7 @@ var render = function() {
           ? [
               _c("div", { staticClass: "card-prices" }, [
                 _c("p", [
-                  _vm._v("Цена: "),
+                  _vm._v("\n                    Цена:\n                    "),
                   _c("span", [_vm._v(_vm._s(_vm.product.regular_price) + " ₽")])
                 ]),
                 _vm._v(" "),

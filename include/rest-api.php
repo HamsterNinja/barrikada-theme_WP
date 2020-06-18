@@ -480,8 +480,8 @@ function getProducts(WP_REST_Request $request) {
             $product = (object)[];
             $product->id = $post->ID;
             $categories = get_the_terms( $post->ID, 'product_cat' );
-        $current_cat = $categories;
-        $product->categories = $current_cat[0]->name;
+            $current_cats = $categories;
+            $product->categories = $current_cats;
             $product->slug = $post->post_name;
             $product->name = $post->post_title;
             $product->permalink = get_permalink($post->ID);
