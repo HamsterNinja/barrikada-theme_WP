@@ -8546,31 +8546,26 @@ var render = function() {
       2
     ),
     _vm._v(" "),
-    _vm._m(0)
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-info" }, [
+    _c("div", { staticClass: "card-info" }, [
       _c("div", { staticClass: "card-info-row" }, [
-        _c("div", { staticClass: "card-info-name" }, [_vm._v("Материалы:")]),
+        _c("div", { staticClass: "card-info-name" }, [_vm._v("Страна:")]),
         _vm._v(" "),
         _c("div", { staticClass: "card-info-value" }, [
-          _vm._v("Дерево, пластик")
+          _vm._v(_vm._s(_vm.product.country))
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-info-row" }, [
         _c("div", { staticClass: "card-info-name" }, [_vm._v("Размер:")]),
         _vm._v(" "),
-        _c("div", { staticClass: "card-info-value" }, [_vm._v("40х30х80")])
+        _c("div", { staticClass: "card-info-value" }, [
+          _vm._v(_vm._s(_vm.product.sizes))
+        ])
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

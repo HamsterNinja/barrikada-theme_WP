@@ -484,6 +484,10 @@ function getProducts(WP_REST_Request $request) {
             $product->categories = $current_cats;
             $product->slug = $post->post_name;
             $product->name = $post->post_title;
+            
+            $product->sizes = $productInstance->get_attribute( 'pa_razmer' );
+            $product->country = $productInstance->get_attribute( 'pa_strana-proizvodstva' );
+
             $product->permalink = get_permalink($post->ID);
             $product->regular_price = $productInstance->get_regular_price();
             $product->sale_price = $productInstance->get_sale_price();

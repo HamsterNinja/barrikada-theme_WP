@@ -47,12 +47,12 @@
         </div>
         <div class="card-info">
             <div class="card-info-row">
-                <div class="card-info-name">Материалы:</div>
-                <div class="card-info-value">Дерево, пластик</div>
+                <div class="card-info-name">Страна:</div>
+                <div class="card-info-value">{{ product.country }}</div>
             </div>
             <div class="card-info-row">
                 <div class="card-info-name">Размер:</div>
-                <div class="card-info-value">40х30х80</div>
+                <div class="card-info-value">{{ product.sizes }}</div>
             </div>
         </div>
     </div>
