@@ -212,7 +212,8 @@ favorites: state.favorites,
             let zamki = this.state.zamki;
             let zhestkost = this.state.zhestkost;
 
-            let per_page = this.state.category_count_page;
+            // let per_page = this.state.category_count_page;
+            let per_page = 15;
 
             let catalogItemsOrderBy = this.state.catalogItemsOrderBy;
             
@@ -266,10 +267,9 @@ favorites: state.favorites,
             
             if(responseProducts){
                 const dataProducts = await responseProducts.json();
-                console.log();
                 commit('ALL_PRODUCTS_SUCCESS',  dataProducts.data.posts.concat(this.state.products));
                 commit('updateCategoryCount', dataProducts.data.found_posts);
-                commit('updateCategoryCountPage', Math.ceil(dataProducts.data.found_posts / 16));
+                commit('updateCategoryCountPage', Math.ceil(dataProducts.data.found_posts / 15));
             }
             commit('updateLoadingProducts', false);
 

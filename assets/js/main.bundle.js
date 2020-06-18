@@ -8034,7 +8034,7 @@ var component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_
 
 /* hot reload */
 if (false) {
-  var api = require("C:\\xampp\\htdocs\\barrikada_wp\\wp-content\\themes\\barrikada-theme_WP\\node_modules\\vue-hot-reload-api\\dist\\index.js")
+  var api = require("C:\\xampp\\htdocs\\barrikada\\wp-content\\themes\\barrikada-theme\\node_modules\\vue-hot-reload-api\\dist\\index.js")
   api.install(require('vue'))
   if (api.compatible) {
     module.hot.accept()
@@ -8249,7 +8249,7 @@ var component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_
 
 /* hot reload */
 if (false) {
-  var api = require("C:\\xampp\\htdocs\\barrikada_wp\\wp-content\\themes\\barrikada-theme_WP\\node_modules\\vue-hot-reload-api\\dist\\index.js")
+  var api = require("C:\\xampp\\htdocs\\barrikada\\wp-content\\themes\\barrikada-theme\\node_modules\\vue-hot-reload-api\\dist\\index.js")
   api.install(require('vue'))
   if (api.compatible) {
     module.hot.accept()
@@ -8374,7 +8374,7 @@ var component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_
 
 /* hot reload */
 if (false) {
-  var api = require("C:\\xampp\\htdocs\\barrikada_wp\\wp-content\\themes\\barrikada-theme_WP\\node_modules\\vue-hot-reload-api\\dist\\index.js")
+  var api = require("C:\\xampp\\htdocs\\barrikada\\wp-content\\themes\\barrikada-theme\\node_modules\\vue-hot-reload-api\\dist\\index.js")
   api.install(require('vue'))
   if (api.compatible) {
     module.hot.accept()
@@ -8572,7 +8572,7 @@ var component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_
 
 /* hot reload */
 if (false) {
-  var api = require("C:\\xampp\\htdocs\\barrikada_wp\\wp-content\\themes\\barrikada-theme_WP\\node_modules\\vue-hot-reload-api\\dist\\index.js")
+  var api = require("C:\\xampp\\htdocs\\barrikada\\wp-content\\themes\\barrikada-theme\\node_modules\\vue-hot-reload-api\\dist\\index.js")
   api.install(require('vue'))
   if (api.compatible) {
     module.hot.accept()
@@ -26729,8 +26729,9 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
                 vid = _this.state.vid;
                 vysota = _this.state.vysota;
                 zamki = _this.state.zamki;
-                zhestkost = _this.state.zhestkost;
-                per_page = _this.state.category_count_page;
+                zhestkost = _this.state.zhestkost; // let per_page = this.state.category_count_page;
+
+                per_page = 15;
                 catalogItemsOrderBy = _this.state.catalogItemsOrderBy;
                 searchData = "product-cat=".concat(catalogCategory, "&order_by=").concat(catalogItemsOrderBy, "&per_page=").concat(per_page, "&range_price=").concat(rangePrice, "&sizes=").concat(catalogSizes, "&materials=").concat(catalogMaterials, "&colors=").concat(catalogColors, "&paged=").concat(catalogPaged, "&widths=").concat(catalogWidths, "&range_price=").concat(rangePrice, "&sort=").concat(catalogSort, "&cvet=").concat(cvet, "&dlina=").concat(dlina, "&dlina_max=").concat(dlina_max, "&dvuxyarusnye=").concat(dvuxyarusnye, "&forma=").concat(forma, "&glubina=").concat(glubina, "&material_fasada=").concat(material_fasada, "&material_karkasa=").concat(material_karkasa, "&material_obivki=").concat(material_obivki, "&mexanizm=").concat(mexanizm, "&napolnenie=").concat(napolnenie, "&obivka=").concat(obivka, "&osnovanie=").concat(osnovanie, "&osobennosti=").concat(osobennosti, "&raskladka=").concat(raskladka, "&raskladnoj=").concat(raskladnoj, "&razmer=").concat(razmer, "&s_yashhikom=").concat(s_yashhikom, "&shirina=").concat(shirina, "&sidene=").concat(sidene, "&so_spalnym_mestom=").concat(so_spalnym_mestom, "&spalnoe_mesto_dlina=").concat(spalnoe_mesto_dlina, "&spalnoe_mesto_shirina=").concat(spalnoe_mesto_shirina, "&stil=").concat(stil, "&stoleshnica=").concat(stoleshnica, "&strana_proizvodstva=").concat(strana_proizvodstva, "&tip=").concat(tip, "&tolshhina=").concat(tolshhina, "&vid=").concat(vid, "&vysota=").concat(vysota, "&zamki=").concat(zamki, "&zhestkost=").concat(zhestkost);
                 responseProducts = "";
@@ -26817,7 +26818,7 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
 
               case 88:
                 if (!responseProducts) {
-                  _context.next = 96;
+                  _context.next = 95;
                   break;
                 }
 
@@ -26826,27 +26827,26 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
 
               case 91:
                 dataProducts = _context.sent;
-                console.log();
                 commit('ALL_PRODUCTS_SUCCESS', dataProducts.data.posts.concat(_this.state.products));
                 commit('updateCategoryCount', dataProducts.data.found_posts);
-                commit('updateCategoryCountPage', Math.ceil(dataProducts.data.found_posts / 16));
+                commit('updateCategoryCountPage', Math.ceil(dataProducts.data.found_posts / 15));
 
-              case 96:
+              case 95:
                 commit('updateLoadingProducts', false);
-                _context.next = 102;
+                _context.next = 101;
                 break;
 
-              case 99:
-                _context.prev = 99;
+              case 98:
+                _context.prev = 98;
                 _context.t0 = _context["catch"](1);
                 console.error(_context.t0);
 
-              case 102:
+              case 101:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 99]]);
+        }, _callee, null, [[1, 98]]);
       }))();
     }
   }
@@ -27807,7 +27807,7 @@ var component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_
 
 /* hot reload */
 if (false) {
-  var api = require("C:\\xampp\\htdocs\\barrikada_wp\\wp-content\\themes\\barrikada-theme_WP\\node_modules\\vue-hot-reload-api\\dist\\index.js")
+  var api = require("C:\\xampp\\htdocs\\barrikada\\wp-content\\themes\\barrikada-theme\\node_modules\\vue-hot-reload-api\\dist\\index.js")
   api.install(require('vue'))
   if (api.compatible) {
     module.hot.accept()
@@ -27920,7 +27920,7 @@ var component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_
 
 /* hot reload */
 if (false) {
-  var api = require("C:\\xampp\\htdocs\\barrikada_wp\\wp-content\\themes\\barrikada-theme_WP\\node_modules\\vue-hot-reload-api\\dist\\index.js")
+  var api = require("C:\\xampp\\htdocs\\barrikada\\wp-content\\themes\\barrikada-theme\\node_modules\\vue-hot-reload-api\\dist\\index.js")
   api.install(require('vue'))
   if (api.compatible) {
     module.hot.accept()
@@ -28046,7 +28046,7 @@ var component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_
 
 /* hot reload */
 if (false) {
-  var api = require("C:\\xampp\\htdocs\\barrikada_wp\\wp-content\\themes\\barrikada-theme_WP\\node_modules\\vue-hot-reload-api\\dist\\index.js")
+  var api = require("C:\\xampp\\htdocs\\barrikada\\wp-content\\themes\\barrikada-theme\\node_modules\\vue-hot-reload-api\\dist\\index.js")
   api.install(require('vue'))
   if (api.compatible) {
     module.hot.accept()
@@ -28164,7 +28164,7 @@ var component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_
 
 /* hot reload */
 if (false) {
-  var api = require("C:\\xampp\\htdocs\\barrikada_wp\\wp-content\\themes\\barrikada-theme_WP\\node_modules\\vue-hot-reload-api\\dist\\index.js")
+  var api = require("C:\\xampp\\htdocs\\barrikada\\wp-content\\themes\\barrikada-theme\\node_modules\\vue-hot-reload-api\\dist\\index.js")
   api.install(require('vue'))
   if (api.compatible) {
     module.hot.accept()
@@ -28272,7 +28272,7 @@ var component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_
 
 /* hot reload */
 if (false) {
-  var api = require("C:\\xampp\\htdocs\\barrikada_wp\\wp-content\\themes\\barrikada-theme_WP\\node_modules\\vue-hot-reload-api\\dist\\index.js")
+  var api = require("C:\\xampp\\htdocs\\barrikada\\wp-content\\themes\\barrikada-theme\\node_modules\\vue-hot-reload-api\\dist\\index.js")
   api.install(require('vue'))
   if (api.compatible) {
     module.hot.accept()
@@ -28363,7 +28363,7 @@ var component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_
 
 /* hot reload */
 if (false) {
-  var api = require("C:\\xampp\\htdocs\\barrikada_wp\\wp-content\\themes\\barrikada-theme_WP\\node_modules\\vue-hot-reload-api\\dist\\index.js")
+  var api = require("C:\\xampp\\htdocs\\barrikada\\wp-content\\themes\\barrikada-theme\\node_modules\\vue-hot-reload-api\\dist\\index.js")
   api.install(require('vue'))
   if (api.compatible) {
     module.hot.accept()

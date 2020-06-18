@@ -428,6 +428,7 @@ const app = new Vue({
         showMoreProducts(){
             this.$store.commit('updatePageNum', this.pageNum + 1);
             this.applyFilter();
+
         },
 
         resetFilters(){                 
