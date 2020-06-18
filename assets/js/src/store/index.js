@@ -23,6 +23,7 @@ const store = new Vuex.Store({
         category_count: '',
         category_count_page: 12,
         searchString: SITEDATA.search_query,
+        isFilterSearch: false,
         
         catalogSort: '',
         catalogPrices: [],
@@ -101,6 +102,7 @@ favorites: state.favorites,
         updateFavorites: set('favorites'),
         
         updateCatalogItemsOrderBy: set('catalogItemsOrderBy'),
+        updateIsFilterSearch: set('isFilterSearch'),
 
         updateCvet: set('cvet'),
         updateDlina: set('dlina'),
@@ -267,7 +269,13 @@ favorites: state.favorites,
             
             if(responseProducts){
                 const dataProducts = await responseProducts.json();
-                commit('ALL_PRODUCTS_SUCCESS',  dataProducts.data.posts.concat(this.state.products));
+
+                if (this.state.isFilterSearch) {
+                    commit('ALL_PRODUCTS_SUCCESS',  dataProducts.data.posts);
+                }
+                else{
+                    commit('ALL_PRODUCTS_SUCCESS',  dataProducts.data.posts.concat(this.state.products));
+                }
                 commit('updateCategoryCount', dataProducts.data.found_posts);
                 commit('updateCategoryCountPage', Math.ceil(dataProducts.data.found_posts / 15));
             }

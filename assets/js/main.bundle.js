@@ -7748,7 +7748,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_6_vue___default.a({
     },
     showMoreProducts: function showMoreProducts() {
       this.$store.commit('updatePageNum', this.pageNum + 1);
-      this.applyFilter();
+      this.applyFilter(false);
     },
     resetFilters: function resetFilters() {
       this.$store.commit('updateCatalogColors', []);
@@ -7770,7 +7770,9 @@ var app = new __WEBPACK_IMPORTED_MODULE_6_vue___default.a({
       this.applyFilter();
     },
     applyFilter: function applyFilter() {
+      var is_filter = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       this.open_mobile_menu_filters = false;
+      this.$store.commit('updateIsFilterSearch', is_filter);
       __WEBPACK_IMPORTED_MODULE_8__store__["a" /* default */].dispatch('allProducts');
     },
     selectPage: function selectPage(pageNum) {
@@ -26528,6 +26530,7 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     category_count: '',
     category_count_page: 12,
     searchString: SITEDATA.search_query,
+    isFilterSearch: false,
     catalogSort: '',
     catalogPrices: [],
     catalogColors: [],
@@ -26606,6 +26609,7 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     updateCatalogMaterials: set('catalogMaterials'),
     updateFavorites: set('favorites'),
     updateCatalogItemsOrderBy: set('catalogItemsOrderBy'),
+    updateIsFilterSearch: set('isFilterSearch'),
     updateCvet: set('cvet'),
     updateDlina: set('dlina'),
     updateDlina_max: set('dlina_max'),
@@ -26827,7 +26831,13 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
 
               case 91:
                 dataProducts = _context.sent;
-                commit('ALL_PRODUCTS_SUCCESS', dataProducts.data.posts.concat(_this.state.products));
+
+                if (_this.state.isFilterSearch) {
+                  commit('ALL_PRODUCTS_SUCCESS', dataProducts.data.posts);
+                } else {
+                  commit('ALL_PRODUCTS_SUCCESS', dataProducts.data.posts.concat(_this.state.products));
+                }
+
                 commit('updateCategoryCount', dataProducts.data.found_posts);
                 commit('updateCategoryCountPage', Math.ceil(dataProducts.data.found_posts / 15));
 

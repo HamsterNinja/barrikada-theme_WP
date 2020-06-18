@@ -427,7 +427,7 @@ const app = new Vue({
 
         showMoreProducts(){
             this.$store.commit('updatePageNum', this.pageNum + 1);
-            this.applyFilter();
+            this.applyFilter(false);
 
         },
 
@@ -451,8 +451,9 @@ const app = new Vue({
             this.applyFilter();                 
         },
 
-        applyFilter(){
+        applyFilter(is_filter = true){
             this.open_mobile_menu_filters = false;
+            this.$store.commit('updateIsFilterSearch', is_filter);
             store.dispatch('allProducts');
         },
 
