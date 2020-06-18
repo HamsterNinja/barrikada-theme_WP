@@ -6,7 +6,7 @@
             </template>
             <img :src="currentPhoto" alt="">
         </a>
-        <div class="card-cat"><h3>Мебель для кухни</h3></div>
+        <div class="card-cat"><h3>{{ product.category }}</h3></div>
         <a :href="product.permalink" class="card-name"><h4>{{ product.name }}</h4></a>
         <div class="card-bottom">
             <template v-if="product.sale_price">  

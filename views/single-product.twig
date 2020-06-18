@@ -3,15 +3,18 @@
 <div class="product-page-content">
 	<div class="container">
 		<div class="catalog-header">
-			<nav class="woocommerce-breadcrumb"><a href="">Главная</a>&nbsp;/&nbsp;Каталог</nav>
+			{{ function('woocommerce_breadcrumb') }}
 		</div>
 	<div class="product-page-top">
 		<div class="product-page-slider">
 			<div class="swiper-container gallery-top">
 			    <div class="swiper-wrapper">
-			    	{% for item in 0..5 %}
+			    	<div class="swiper-slide">
+			      		<img src="{{ post.thumbnail.src('full') }}" alt="">
+			      	</div>
+			    	{% for id in product.gallery_image_ids %}
 			      	<div class="swiper-slide">
-			      		<img src="{{ site.theme.link }}/assets/images/product.jpg" alt="">
+			      		<img src="{{ Image(id).src }}" alt="">
 			      	</div>
 			      	{% endfor %}
 			    </div>
@@ -20,11 +23,14 @@
 			  </div>
 			  <div class="swiper-container gallery-thumbs">
 			    <div class="swiper-wrapper">
-			     	{% for item in 0..5 %}
 			     	<div class="swiper-slide">
-			     		<img src="{{ site.theme.link }}/assets/images/product.jpg" alt="">
-			     	</div>
-			     	{% endfor %}
+			      		<img src="{{ post.thumbnail.src('full') }}" alt="">
+			      	</div>
+			    	{% for id in product.gallery_image_ids %}
+			      	<div class="swiper-slide">
+			      		<img src="{{ Image(id).src }}" alt="">
+			      	</div>
+			      	{% endfor %}
 			    </div>
 			    <div class="swiper-button-next swiper-button-red"></div>
 			    <div class="swiper-button-prev swiper-button-red"></div>
@@ -32,17 +38,19 @@
 		</div>
 		<div class="product-page-card">
 			<div class="product-article">Артикул: {{ sku }}</div>
-			<div class="product-cat"><h2>Мебель для кухни</h2></div>
+			<div class="product-cat"><h2>{{ current_cat }}</h2></div>
 			<div class="product-page-card-name"><h1>{{ post.title }}</h1></div>
 			<div class="product-card-info">
-				<div class="product-card-info-row">
-					<div class="product-card-info-name">Размер:</div>
-					<div class="product-card-info-value">40х30х80</div>
-				</div>
-				<div class="product-card-info-row">
-					<div class="product-card-info-name">Материалы:</div>
-					<div class="product-card-info-value">Кожа, поролон, дерево, металл</div>
-				</div>
+				{% for attribute in product_attributes %}
+                    <div class="product-card-info-row">
+						<div class="product-card-info-name">{{attribute.singular_name}}:</div>
+						<div class="product-card-info-value">
+						{% for attribute_value in attribute.values %}
+							{{ attribute_value.value }}{% if not loop.last %},{%  endif %}
+						{% endfor %}
+						</div>
+					</div>
+                {% endfor %}
 			</div>
 			<div class="product-card-bottom">
 				<div class="product-card-left">
@@ -82,53 +90,26 @@
 		<div class="product-description">
 			<div class="product-description-title">Описание</div>
 			<div class="product-description-text">
-				<p>Кровать "Румба" выполнена в классическом дизайне: прямые линии и насыщенный цвет венге будут удачно смотреться в спокойном, элегантном интерьере подростковой комнаты.</p>
+				{{ post.content }}
 			</div>
 			<div class="product-description-content">
 				
 				 <div class="description-item">
 				 	<div class="description-item-name">Размеры</div>
-				 	<table>
-				 		{% for item in 0..6 %}
-				 		<tr>
-				 			<td>Высота спинки (изголовье)</td>
-				 			<td>0,091 куб. м</td>
-				 		</tr>
-				 		{% endfor %}
+				 	{{ razmery }}
 				 	</table>
 				 </div>
 				 <div class="description-item">
 				 	<div class="description-item-name">Внешний вид</div>
-				 	<table>
-				 		{% for item in 0..2 %}
-				 		<tr>
-				 			<td>Высота спинки (изголовье)</td>
-				 			<td>0,091 куб. м</td>
-				 		</tr>
-				 		{% endfor %}
-				 	</table>
+				 	{{ vneshniy_vid }}
 				 </div>
 				 <div class="description-item">
 				 	<div class="description-item-name">Комплектация</div>
-				 	<table>
-				 		{% for item in 0..4 %}
-				 		<tr>
-				 			<td>Высота спинки (изголовье)</td>
-				 			<td>0,091 куб. м</td>
-				 		</tr>
-				 		{% endfor %}
-				 	</table>
+				 	{{ komplekt }}
 				 </div>
 				 <div class="description-item">
 				 	<div class="description-item-name">Особенности</div>
-				 	<table>
-				 		{% for item in 0..3 %}
-				 		<tr>
-				 			<td>Высота спинки (изголовье)</td>
-				 			<td>0,091 куб. м</td>
-				 		</tr>
-				 		{% endfor %}
-				 	</table>
+				 	{{ osobennosti }}
 				 </div>
 			</div>
 		</div>

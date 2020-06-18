@@ -139,7 +139,30 @@ function getProducts(WP_REST_Request $request) {
         $vysota = $_GET['vysota'] ? explode( ',', $_GET['vysota']) : [];
         $zamki = $_GET['zamki'] ? explode( ',', $_GET['zamki']) : [];
         $zhestkost = $_GET['zhestkost'] ? explode( ',', $_GET['zhestkost']) : [];
-     
+        
+        $categories = get_the_terms( $post->ID, 'product_cat' );
+                $args = array(
+                'post_type' => 'product',
+                'posts_per_page' => 60,
+                'post_parent' => 0,
+                'orderby' => 'rand',
+                'tax_query' => array(
+                    'relation' => 'AND',
+                    array(
+                        'taxonomy' => 'product_cat',
+                        'field' => 'term_id',
+                        'terms' => $categories[0]->term_id,
+                    )
+                )   
+            );           
+            $current_cat = $categories[0]->name;
+            $recommended_products = new Timber\PostQuery($args);
+            $recommended_products_ids = wp_list_pluck( $recommended_products, 'ID' );
+            $context['recommended_products_ids'] = $recommended_products_ids;
+            $context['current_cat'] = $current_cat;
+
+            $product->category= $current_cat;
+            
         $args = array(
             'post_status' => 'publish',
             'post_type' => array('product', 'product_variation'),

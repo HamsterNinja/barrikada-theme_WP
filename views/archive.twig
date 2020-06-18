@@ -3,7 +3,7 @@
 <div class="product-page-content">
 	<div class="container">
 		<div class="catalog-header">
-			<nav class="woocommerce-breadcrumb"><a href="">Главная</a>&nbsp;/&nbsp;Каталог</nav>
+			{{ function('woocommerce_breadcrumb') }}
 			<div class="catalog-title">
 				<h1>Новости</h1>
 				<hr class="catalog-title-decore">
@@ -13,18 +13,27 @@
 			<img src="{{ site.theme.link }}/assets/images/action.jpg" alt="">
 		</div>
 		<div class="actions-content">
-			{% for item in 0..8 %}
+			{% if posts is not empty  %}
+					{% for post in posts %}
 			<a href="" class="news-item">
+				{% if post.thumbnail %}
 				<div class="actions-item-img">
-					<img src="{{ site.theme.link }}/assets/images/news.jpg" alt="">
+					<img src="{{ post.thumbnail.src }}" alt="">
 				</div>
+				{% endif %}
 				<div class="actions-item-date">04.02.2020</div>
 				<div class="actions-item-info">
-					<div class="actions-item-name">Преимущества садовой мебели для вашего сада.</div>
+					<div class="actions-item-name">{{ post.title }}</div>
 					<div class="actions-item-text">В период с c 21 по 25 ноября 2016 в ЦВК «Экспоцентр» на Красной Пресне в столице пройдет очередная, 28-я по счету Международная выставка «Мебель</div>
 				</div>
 			</a>
 			{% endfor %}
+			{% else %}
+					<div class="not-content">
+						Категория пуста
+					</div>
+				{% endif %}
+				{% include 'partials/pagination.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
 		</div>
 	</div>
 

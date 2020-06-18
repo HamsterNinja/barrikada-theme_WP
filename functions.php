@@ -246,7 +246,11 @@ class StarterSite extends TimberSite {
         $context['menu_buyers'] = new TimberMenu('menu_buyers');      
         $context['menu_sales'] = new TimberMenu('menu_sales');      
         $context['menu_company'] = new TimberMenu('menu_company');    
-        
+        $context['stock_date'] = get_field('время_действия');
+        $context['osobennosti'] = get_field('особенности');
+        $context['razmery'] = get_field('размеры');
+        $context['vneshniy_vid'] = get_field('внешний_вид');
+        $context['komplekt'] = get_field('комплектация');
         $context['phone'] = get_field('phone', 'options');
         $context['mail'] = get_field('mail', 'options');
         $context['whatsapp'] = get_field('whatsapp', 'options');
@@ -257,7 +261,10 @@ class StarterSite extends TimberSite {
         global $product; //Если не объявлен ранее. Не уверен в необходимости.
 
 
-       
+            
+
+
+
             $categories = get_the_terms( $post->ID, 'product_cat' );
                 $args = array(
                 'post_type' => 'product',
@@ -273,9 +280,11 @@ class StarterSite extends TimberSite {
                     )
                 )   
             );           
+            $current_cat = $categories[0]->name;
             $recommended_products = new Timber\PostQuery($args);
-            $recommended_products_ids = wp_list_pluck( $recommended_products, 'ID' ); 
+            $recommended_products_ids = wp_list_pluck( $recommended_products, 'ID' );
             $context['recommended_products_ids'] = $recommended_products_ids;
+            $context['current_cat'] = $current_cat;
            
         $categories = get_the_terms( $post->ID, 'product_cat' );
         

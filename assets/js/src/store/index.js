@@ -9,7 +9,13 @@ const set = key => (state, val) => {
 
 const store = new Vuex.Store({
     state: {
-        rangePrice: [SITEDATA.min_price_per_product_cat, SITEDATA.max_price_per_product_cat], 
+        rangePrice: [SITEDATA.min_price_per_product_cat, SITEDATA.max_price_per_product_cat],
+        rangeDlina: [SITEDATA.min_dlina_per_product_cat, SITEDATA.max_dlina_per_product_cat],
+        rangeDlina_max: [SITEDATA.min_dlina_max_per_product_cat, SITEDATA.max_dlina_max_per_product_cat],
+        rangeShirina: [SITEDATA.min_shirina_per_product_cat, SITEDATA.max_shirina_per_product_cat],
+        rangeVysota: [SITEDATA.min_vysota_per_product_cat, SITEDATA.max_vysota_per_product_cat],
+        rangeTolshhina: [SITEDATA.min_tolshhina_per_product_cat, SITEDATA.max_tolshhina_per_product_cat],
+        rangeGlubina: [SITEDATA.min_glubina_per_product_cat, SITEDATA.max_glubina_per_product_cat],
         favorites: [],
         viewedProducts: [],
         cartSubtotal: parseFloat(SITEDATA.cart_subtotal),

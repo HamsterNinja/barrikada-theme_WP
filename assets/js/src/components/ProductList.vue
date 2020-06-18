@@ -11,7 +11,8 @@
             </template>
         </transition-group>
         <template v-if="products.length == 0 && !loadingProducts">
-            <div class="not-content">Категория пуста</div>
+            <div v-if="is_search == 'true'" class="not-content">Ничего не найдено</div>
+            <div v-else class="not-content">Категория пуста</div>
         </template>
     </div>
 </template>
@@ -25,7 +26,8 @@ export default {
     },
     data() {
         return {
-            template_url: SITEDATA.themepath
+            template_url: SITEDATA.themepath,
+            is_search: SITEDATA.is_search
         };
     },
     computed: {

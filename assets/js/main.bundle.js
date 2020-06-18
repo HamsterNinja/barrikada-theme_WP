@@ -4646,6 +4646,7 @@ var index = {
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: "product-list",
   props: ["classItem"],
@@ -4654,7 +4655,8 @@ var index = {
   },
   data: function data() {
     return {
-      template_url: SITEDATA.themepath
+      template_url: SITEDATA.themepath,
+      is_search: SITEDATA.is_search
     };
   },
   computed: {
@@ -8333,9 +8335,13 @@ var render = function() {
       _vm._v(" "),
       _vm.products.length == 0 && !_vm.loadingProducts
         ? [
-            _c("div", { staticClass: "not-content" }, [
-              _vm._v("Категория пуста")
-            ])
+            _vm.is_search == "true"
+              ? _c("div", { staticClass: "not-content" }, [
+                  _vm._v("Ничего не найдено")
+                ])
+              : _c("div", { staticClass: "not-content" }, [
+                  _vm._v("Категория пуста")
+                ])
           ]
         : _vm._e()
     ],
@@ -8435,7 +8441,9 @@ var render = function() {
       2
     ),
     _vm._v(" "),
-    _vm._m(0),
+    _c("div", { staticClass: "card-cat" }, [
+      _c("h3", [_vm._v(_vm._s(_vm.product.category))])
+    ]),
     _vm._v(" "),
     _c(
       "a",
@@ -8508,18 +8516,10 @@ var render = function() {
       2
     ),
     _vm._v(" "),
-    _vm._m(1)
+    _vm._m(0)
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-cat" }, [
-      _c("h3", [_vm._v("Мебель для кухни")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -26517,6 +26517,12 @@ var set = function set(key) {
 var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
   state: {
     rangePrice: [SITEDATA.min_price_per_product_cat, SITEDATA.max_price_per_product_cat],
+    rangeDlina: [SITEDATA.min_dlina_per_product_cat, SITEDATA.max_dlina_per_product_cat],
+    rangeDlina_max: [SITEDATA.min_dlina_max_per_product_cat, SITEDATA.max_dlina_max_per_product_cat],
+    rangeShirina: [SITEDATA.min_shirina_per_product_cat, SITEDATA.max_shirina_per_product_cat],
+    rangeVysota: [SITEDATA.min_vysota_per_product_cat, SITEDATA.max_vysota_per_product_cat],
+    rangeTolshhina: [SITEDATA.min_tolshhina_per_product_cat, SITEDATA.max_tolshhina_per_product_cat],
+    rangeGlubina: [SITEDATA.min_glubina_per_product_cat, SITEDATA.max_glubina_per_product_cat],
     favorites: [],
     viewedProducts: [],
     cartSubtotal: parseFloat(SITEDATA.cart_subtotal),

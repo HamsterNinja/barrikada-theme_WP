@@ -55,8 +55,9 @@
 		<div class="sidebar-menu">
 			<ul>
 				{% for parent_category in Term(main_categories) %}
+				
 				<li>
-					<a href="{{ parent_category.link }}"><img src="{{ site.theme.link }}/assets/images/cat-1.png" alt=""><span>{{ parent_category.title }}</span></a>
+					<a href="{{ parent_category.link }}"><img src="{{ TimberImage(parent_category.meta('thumbnail_id')).src }}" alt=""><span>{{ parent_category.title }}</span></a>
 					{% if parent_category.children %}
 					<ul class="sub-menu">
 						
